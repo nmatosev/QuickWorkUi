@@ -1,31 +1,25 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {NgForm} from '@angular/forms';
+import {User} from './user';
 
-describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  });
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit{
+  title = 'Quick Work';
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+  //public users: User[];
 
-  it(`should have as title 'quickworkui'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('quickworkui');
-  });
+  ngOnInit(): void {
+    this.getUsers();
+  }
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('quickworkui app is running!');
-  });
-});
+  public getUsers(): void {
+    //user service
+  }
+
+
+}
