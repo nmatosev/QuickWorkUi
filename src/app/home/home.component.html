@@ -1,6 +1,18 @@
 <div class="container">
   <header class="jumbotron">
-    <p>{{ content }}</p>
-    <p>Anyone can visit this</p>
+    <div class="row">
+      <div *ngFor="let ad of ads" from class="col-md-6 col-xl-3">
+        <div class="card m-b-30">
+          <div class="card-body row">
+            <div class="col-6 card-title align-self-center mb-0">
+              <h5>{{ad?.title}}</h5>
+            </div>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Opis : {{ad?.content}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </header>
 </div>

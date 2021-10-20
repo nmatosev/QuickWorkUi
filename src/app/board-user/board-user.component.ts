@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services/user.service';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-board-user',
@@ -10,10 +10,10 @@ export class BoardUserComponent implements OnInit {
 
   content?: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.userService.getUserBoard().subscribe(
+    this.apiService.getUserBoard().subscribe(
       data => {
         this.content = data;
       },

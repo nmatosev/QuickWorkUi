@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services/user.service';
+import { ApiService } from '../api.service';
+import {Ad} from '../ad';
 
 @Component({
   selector: 'app-home',
@@ -10,12 +11,14 @@ export class HomeComponent implements OnInit {
 
   content: string;
 
-  constructor(private userService: UserService) { }
+  public ads: Ad[];
+  constructor(private userService: ApiService) { }
 
   ngOnInit() {
-    this.userService.getPublicContent().subscribe(
-      data => {
-        this.content = data;
+    this.userService.getActiveAds().subscribe(
+      (response: Ad[]) => {
+        console.log("ads" + this.ads);
+        this.ads = response;
       },
       err => {
         this.content = JSON.parse(err.error).message;

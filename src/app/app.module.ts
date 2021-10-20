@@ -6,7 +6,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import {AppComponent} from './app.component';
-import {UserService} from './user.service';
+import {ApiService} from './api.service';
 import {FormsModule} from '@angular/forms';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
@@ -40,7 +40,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [UserService, authInterceptorProviders],
+  providers: [ApiService, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 import {User} from './user';
 import {HttpErrorResponse} from '@angular/common/http';
-import {UserService} from './user.service';
+import {ApiService} from './api.service';
 import { TokenStorageService } from './_services/token-storage.service';
 
 @Component({
@@ -15,26 +15,29 @@ export class AppComponent {
   private roles: string[];
   isLoggedIn = false;
   showAdminBoard = false;
-  username: string;
+  username?: string;
 
   public users: User[];
 
-  constructor(private userService: UserService, private tokenStorageService: TokenStorageService) {
+  constructor(private userService: ApiService, private tokenStorageService: TokenStorageService) {
   }
 
   // fetch users on refresh
   ngOnInit() {
-    //this.getUsers();
 
+    this.getUsers();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
 
+      const loggerUser = this.tokenStorageService.getUser();
+
+      this.roles = loggerUser.roles;
+      console.log("user"+ loggerUser.roles);
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
 
-      this.username = user.username;
+      this.username = loggerUser.username;
+
     }
 
 
