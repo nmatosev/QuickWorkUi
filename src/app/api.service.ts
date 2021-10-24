@@ -15,13 +15,13 @@ export class ApiService {
 
   //mapiranje backend objekta u fe
   public getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiServerUrl}/auth/users`);
+    return this.http.get<User[]>(`${this.apiServerUrl}/public/users`);
   }
 
 
   getActiveAds(): Observable<Ad[]> {
     //poredi po karticama
-    return this.http.get<Ad[]>(`${this.apiServerUrl}/auth/ads`);
+    return this.http.get<Ad[]>(`${this.apiServerUrl}/public/ads`);
   }
 
   getUserBoard(): Observable<any> {

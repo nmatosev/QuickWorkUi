@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
+import {User} from "../user";
 
 @Component({
   selector: 'app-login',
@@ -28,9 +29,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     const { username, password } = this.form;
-
+    console.log("on sumb " + username);
     this.authService.login(username, password).subscribe(
       data => {
+        console.log("submit " + JSON.stringify(data))
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
 

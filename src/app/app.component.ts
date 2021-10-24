@@ -30,13 +30,13 @@ export class AppComponent {
 
     if (this.isLoggedIn) {
 
-      const loggerUser = this.tokenStorageService.getUser();
+      const loggedUser = this.tokenStorageService.getUser();
 
-      this.roles = loggerUser.roles;
-      console.log("user"+ loggerUser.roles);
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.roles = loggedUser.roles;
+      console.log("user roles"+ JSON.stringify(loggedUser));
+      //this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
 
-      this.username = loggerUser.username;
+      this.username = loggedUser.username;
 
     }
 
