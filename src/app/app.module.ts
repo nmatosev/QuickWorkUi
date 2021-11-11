@@ -13,12 +13,15 @@ import {RegisterComponent} from './register/register.component';
 import {ProfileComponent} from './profile/profile.component';
 import {BoardAdminComponent} from './board-admin/board-admin.component';
 import {BoardUserComponent} from './board-user/board-user.component';
-import {HomeComponent} from './home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdModalComponent } from './ad-modal/ad-modal.component';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'home', component: HomeComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'board-admin', component: BoardAdminComponent}
 
@@ -32,16 +35,20 @@ const routes: Routes = [
     ProfileComponent,
     BoardAdminComponent,
     BoardUserComponent,
-    HomeComponent
+    AdModalComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [ApiService, authInterceptorProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AdModalComponent]
+
 })
 export class AppModule {
 }

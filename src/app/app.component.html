@@ -6,29 +6,30 @@
             aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
   </nav>
 
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">QuickWork</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home </a>
+        <a href="/home" (click)="openModal()" class="btn btn-info" *ngIf="isLoggedIn" class="nav-link" routerLink="home">Kreiraj novi oglas </a>
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
       </li>
       <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+        <form class="form-inline my-2 my-lg-0">
+          <input type="search" (ngModelChange)="searchAds(key.value)" #key="ngModel" ngModel=""
+                 name="key" id="searchName" class="form-control mr-sm-2" placeholder="Pretraži oglase..." required>
+        </form>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
       <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+        <a href="/register" class="nav-link" routerLink="register">Registracija</a>
       </li>
       <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Login</a>
+        <a href="/login" class="nav-link" routerLink="login">Prijava</a>
       </li>
     </ul>
 
@@ -42,12 +43,27 @@
     </ul>
   </nav>
 
-  <div class="container" id="up-container">
-    <div class="btn-group btn-group-lg" role="group" aria-label="...">
-      <button type="button" class="btn btn-primary">Tražim posao</button>
-      <button type="button" class="btn btn-info">Nudim posao</button>
-    </div>
+  <div class="container">
+    <header class="jumbotron">
+      <div class="row">
+        <div *ngFor="let ad of ads" from class="col-md-6 col-xl-3">
+          <div class="card m-b-30">
+            <div class="card-body row">
+              <div class="col-6 card-title">
+                <h3>{{ad?.title}}</h3>
+              </div>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{ad?.content}}</li>
+              <li class="list-group-item"><i class="fa float-right"></i>Aktivno do: {{ad?.validUntil}}</li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
   </div>
+
   <div class="container" id="main-container">
     <router-outlet></router-outlet>
 
@@ -57,29 +73,24 @@
           <div class="card-body row">
             <div class="col-6">
               <!--<a href=""><img src="{{employee?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>-->
-              <!--
-                          <a href="https://ibb.co/nzY036D"><img src={{employee.imageUrl}} alt="pp" class="img-fluid rounded-circle w-60"></a>
-              -->
+<!--
+              <a href="https://ibb.co/nzY036D"><img src='./assets/blank-profile-picture.png' alt="pp" class="img-fluid rounded-circle w-60"></a>
+-->
             </div>
             <div class="col-6 card-title align-self-center mb-0">
-              <h5>{{user?.username}}</h5>
+              <h3>{{user?.username}}</h3>
             </div>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">{{user?.username}}</a></li>
-            <li class="list-group-item"><i class="fas fa-star float-right"></i>Rating : {{user?.rating}}</li>
+            <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">{{user?.email}}</a></li>
+            <li class="list-group-item"><i class="fas float-right"></i>Rating : {{user?.rating}}</li>
           </ul>
           <div class="card-body">
-            <!--          <div class="float-right btn-group btn-group-sm">
-                        <a (click)="onOpenModel(employee, 'edit')"class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                        <a (click)="onOpenModel(employee, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
-                      </div>-->
-
             <div class="card-body">
               <div class="float-right btn-group btn-group-sm">
-                <a (click)="onOpenModel(user)" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i
+                <a class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i
                   class="fa fa-pencil"></i> </a>
-                <a (click)="onOpenModel(user)" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip"
+                <a class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip"
                    data-original-title="Delete"><i class="fa fa-times"></i></a>
               </div>
             </div>
@@ -89,3 +100,12 @@
     </div>
   </div>
 </div>
+
+<!-- Notification for no active ads -->
+<div *ngIf="ads?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO ACTIVE ADS!</h4>
+    <p>There is no active ads at the moment.</p>
+  </div>
+</div>
+

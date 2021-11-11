@@ -1,0 +1,24 @@
+<div id="modal-content-wrapper">
+  <header id="modal-header">
+    <h1 id="modal-title">Upišite svoj oglas</h1>
+  </header>
+  <section id="modal-body">
+    <p>Upišite svoj oglas. Nađite svog fušera...</p>
+  </section>
+  <form #addForm="ngForm" (ngSubmit)="onSaveAd(addForm)">
+    <div class="form-group">
+      <label for="name">Naslov</label>
+      <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Naslov" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Sadržaj</label>
+      <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Sadržaj" required>
+    </div>
+
+
+  </form>
+  <footer id="modal-footer">
+    <button mat-raised-button id="modal-action-button" (click)="actionFunction()">Spremi</button>
+    <button mat-raised-button id="modal-cancel-button" (click)="closeModal()">Go back</button>
+  </footer>
+</div>

@@ -3,7 +3,10 @@ import {Component} from '@angular/core';
 import {User} from './user';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ApiService} from './api.service';
-import { TokenStorageService } from './_services/token-storage.service';
+import {TokenStorageService} from './_services/token-storage.service';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {AdModalComponent} from './ad-modal/ad-modal.component';
+import {Ad} from "./ad";
 
 @Component({
   selector: 'app-root',
@@ -16,10 +19,12 @@ export class AppComponent {
   isLoggedIn = false;
   showAdminBoard = false;
   username?: string;
+  public ads: Ad[];
+  content: string;
 
   public users: User[];
 
-  constructor(private userService: ApiService, private tokenStorageService: TokenStorageService) {
+  constructor(private userService: ApiService, private tokenStorageService: TokenStorageService, public matDialog: MatDialog) {
   }
 
   // fetch users on refresh
@@ -33,13 +38,21 @@ export class AppComponent {
       const loggedUser = this.tokenStorageService.getUser();
 
       this.roles = loggedUser.roles;
-      console.log("user roles"+ JSON.stringify(loggedUser));
+      console.log("user roles" + JSON.stringify(loggedUser));
       //this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
 
       this.username = loggedUser.username;
 
     }
 
+    this.userService.getActiveAds().subscribe(
+      (response: Ad[]) => {
+        this.ads = response;
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
 
   }
 
@@ -59,17 +72,33 @@ export class AppComponent {
     )
   }
 
-  // adding model programticaly
-  public onOpenModel(user: User): void {
-    const container = document.getElementById('main-container');
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.style.display = 'none';
-    button.setAttribute('data-toggle', 'modal');
-    button.setAttribute('data-target', '#addEmployeeModal');
+  public searchAds(key: string): void {
 
-    //container.appendChild(button);
-    button.click();
+    const results: Ad[] = [];
+    for (const ad of this.ads) {
+      if (ad.content.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        ad.title.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(ad);
+      }
+    }
+
+    this.ads = results;
+    if(results.length === 0 || !key) {
+      this.userService.getActiveAds();
+    }
   }
+
+
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = true;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "350px";
+    dialogConfig.width = "600px";
+    // https://material.angular.io/components/dialog/overview
+    const modalDialog = this.matDialog.open(AdModalComponent, dialogConfig);
+  }
+
 
 }
