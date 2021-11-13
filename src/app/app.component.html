@@ -11,31 +11,35 @@
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/home" (click)="openModal()" class="btn btn-info" *ngIf="isLoggedIn" class="nav-link" routerLink="home">Kreiraj novi oglas </a>
+        <a href="/home" (click)="openModal()" class="btn btn-info" *ngIf="isLoggedIn" class="nav-link" routerLink="home">Create new ad </a>
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
       </li>
       <li class="nav-item">
+        <a href="/" class="nav-link" routerLink="admin">Find your helper</a>
+      </li>
+      <li class="nav-item">
         <form class="form-inline my-2 my-lg-0">
           <input type="search" (ngModelChange)="searchAds(key.value)" #key="ngModel" ngModel=""
-                 name="key" id="searchName" class="form-control mr-sm-2" placeholder="Pretraži oglase..." required>
+                 name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search..." required>
         </form>
       </li>
+
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
       <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Registracija</a>
+        <a href="/register" class="nav-link" routerLink="register">Sign up</a>
       </li>
       <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Prijava</a>
+        <a href="/login" class="nav-link" routerLink="login">Log in</a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
       <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+        <a href="/profile" class="nav-link" routerLink="profile">{{username}}</a>
       </li>
       <li class="nav-item">
         <a href class="nav-link" (click)="logout()">Log Out</a>

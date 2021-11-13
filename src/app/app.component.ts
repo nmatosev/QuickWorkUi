@@ -7,6 +7,7 @@ import {TokenStorageService} from './_services/token-storage.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AdModalComponent} from './ad-modal/ad-modal.component';
 import {Ad} from "./ad";
+import {County} from "./county";
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,8 @@ export class AppComponent {
   content: string;
 
   public users: User[];
+  public counties: County[];
+
 
   constructor(private userService: ApiService, private tokenStorageService: TokenStorageService, public matDialog: MatDialog) {
   }
@@ -54,6 +57,15 @@ export class AppComponent {
       }
     );
 
+    this.userService.getCounties().subscribe(
+      (response: County[]) => {
+        this.counties = response;
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    )
+
   }
 
   logout() {
@@ -72,6 +84,17 @@ export class AppComponent {
     )
   }
 
+  public getAds(): void {
+    this.userService.getActiveAds().subscribe(
+      (response: Ad[]) => {
+        this.ads = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
   public searchAds(key: string): void {
 
     const results: Ad[] = [];
@@ -83,8 +106,10 @@ export class AppComponent {
     }
 
     this.ads = results;
+
     if(results.length === 0 || !key) {
-      this.userService.getActiveAds();
+      console.log(this.userService.getActiveAds())
+      this.getAds();
     }
   }
 

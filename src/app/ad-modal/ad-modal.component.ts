@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import {County} from "../county";
+import {ApiService} from "../api.service";
 
 @Component({
   selector: 'app-ad-modal',
@@ -8,9 +10,20 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class AdModalComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<AdModalComponent>) { }
+  constructor(private userService: ApiService, public dialogRef: MatDialogRef<AdModalComponent>) { }
+  public counties: County[];
+  content: string;
 
   ngOnInit() {
+
+    this.userService.getCounties().subscribe(
+      (response: County[]) => {
+        this.counties = response;
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    )
   }
 
   // Implement call to save ad api
@@ -23,6 +36,8 @@ export class AdModalComponent implements OnInit {
   closeModal() {
     this.dialogRef.close();
   }
+
+
 
   onSaveAd(addForm: any) {
 
