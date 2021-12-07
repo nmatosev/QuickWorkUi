@@ -54,14 +54,13 @@
           <div class="card m-b-30">
             <div class="card-body row">
               <div class="col-6 card-title">
-                <h3>{{ad?.title}}</h3>
+                <h2>{{ad?.title}}</h2>
               </div>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{ad?.content}}</li>
-              <li class="list-group-item"><i class="fa float-right"></i>Aktivno do: {{ad?.validUntil}}</li>
+            <p class="card-text">{{ad?.content}}</p>
+            <p class="card-text">Aktivno do: {{ad?.validUntil}}</p>
+            <h6 class="card-subtitle mb-2 text-muted ">{{ad?.county}}</h6>
 
-            </ul>
           </div>
         </div>
       </div>
