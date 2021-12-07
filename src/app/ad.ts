@@ -3,5 +3,6 @@ export interface Ad{
   id: number;
   title: string;
   content: string;
+  county: string;
   validUntil: string;
 }

@@ -18,7 +18,6 @@ export class TokenStorageService {
 
   public saveToken(token: string): void {
     //skužit zašto se user ne spremi,login komponent šteka?
-    console.log("sess stg " + window.sessionStorage);
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
