@@ -11,7 +11,7 @@
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/home" (click)="openModal()" class="btn btn-info" *ngIf="isLoggedIn" class="nav-link" routerLink="home">Create new ad </a>
+        <a (click)="openModal()" class="btn btn-info" *ngIf="isLoggedIn" class="nav-link">Create new ad </a>
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
@@ -52,63 +52,74 @@
       <div class="row">
         <div *ngFor="let ad of ads" from class="col-md-6 col-xl-3">
           <div class="card m-b-30">
-            <div class="card-body row">
-              <div class="col-6 card-title">
-                <h2>{{ad?.title}}</h2>
+            <div class="card-header">Aktivno do: {{ad?.validUntil}}
+            </div>
+            <div class="card-body">
+              <div class="tab-content">
+
+                <div class="tab-pane active"  id="ad">
+                  <h2 class="card-title">{{ad?.title}}</h2>
+                  <p class="card-text">{{ad?.content}}</p>
+                  <p class="card-text"></p>
+                  <a href="#" class="card-link">{{ad?.username}}</a>
+                  <h5 class="card-subtitle mb-2 text-muted ">{{ad?.county}}</h5>
+                </div>
+                <div class="tab-pane" id="userProfile">{{ad?.username}}</div>
+                <a [routerLink]="['/userProfile/', ad.username]" class="btn btn-primary stretched-link">Detalji</a>
               </div>
             </div>
-            <p class="card-text">{{ad?.content}}</p>
-            <p class="card-text">Aktivno do: {{ad?.validUntil}}</p>
-            <h6 class="card-subtitle mb-2 text-muted ">{{ad?.county}}</h6>
-
           </div>
         </div>
       </div>
     </header>
   </div>
+  <router-outlet></router-outlet>
 
   <div class="container" id="main-container">
-    <router-outlet></router-outlet>
 
-    <div class="row">
-      <div *ngFor="let user of users" from class="col-md-6 col-xl-3">
-        <div class="card m-b-30">
-          <div class="card-body row">
-            <div class="col-6">
-              <!--<a href=""><img src="{{employee?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>-->
-<!--
-              <a href="https://ibb.co/nzY036D"><img src='./assets/blank-profile-picture.png' alt="pp" class="img-fluid rounded-circle w-60"></a>
--->
+    <div class="container">
+
+      <div class="row">
+        <div *ngFor="let user of users" from class="col-md-6 col-xl-3">
+          <div class="card m-b-30">
+            <div class="card-body row">
+              <div class="col-6">
+                <!--<a href=""><img src="{{employee?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>-->
+                <!--
+                              <a href="https://ibb.co/nzY036D"><img src='./assets/blank-profile-picture.png' alt="pp" class="img-fluid rounded-circle w-60"></a>
+                -->
+              </div>
+              <div class="col-6 card-title align-self-center mb-0">
+                <h3>{{user?.username}}</h3>
+              </div>
             </div>
-            <div class="col-6 card-title align-self-center mb-0">
-              <h3>{{user?.username}}</h3>
-            </div>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">{{user?.email}}</a></li>
-            <li class="list-group-item"><i class="fas float-right"></i>Rating : {{user?.rating}}</li>
-          </ul>
-          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">{{user?.email}}</a></li>
+              <li class="list-group-item"><i class="fas float-right"></i>Rating : {{user?.rating}}</li>
+            </ul>
             <div class="card-body">
-              <div class="float-right btn-group btn-group-sm">
-                <a class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i
-                  class="fa fa-pencil"></i> </a>
-                <a class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip"
-                   data-original-title="Delete"><i class="fa fa-times"></i></a>
+              <div class="card-body">
+                <div class="float-right btn-group btn-group-sm">
+                  <a class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i
+                    class="fa fa-pencil"></i> </a>
+                  <a class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip"
+                     data-original-title="Delete"><i class="fa fa-times"></i></a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- Notification for no active ads -->
-<div *ngIf="ads?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
-  <div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">NO ACTIVE ADS!</h4>
-    <p>There is no active ads at the moment.</p>
   </div>
-</div>
+
+
+  <!-- Notification for no active ads -->
+  <div *ngIf="ads?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO ACTIVE ADS!</h4>
+      <p>There is no active ads at the moment.</p>
+    </div>
+  </div>
 
