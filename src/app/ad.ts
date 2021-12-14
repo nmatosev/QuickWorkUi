@@ -6,4 +6,10 @@ export interface Ad{
   county: string;
   validUntil: string;
   username: string;
+  user: {
+    username: string;
+    email: string;
+    phoneNumber: string;
+    rating: string;
+  }
 }

@@ -8,6 +8,8 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AdModalComponent} from './ad-modal/ad-modal.component';
 import {Ad} from "./ad";
 import {County} from "./county";
+import {ContactModalComponent} from "./contact-modal/contact-modal.component";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -22,12 +24,12 @@ export class AppComponent {
   username?: string;
   public ads: Ad[];
   content: string;
-
+  public ad: Ad;
   public users: User[];
   public counties: County[];
 
 
-  constructor(private userService: ApiService, private tokenStorageService: TokenStorageService, public matDialog: MatDialog) {
+  constructor(private userService: ApiService, private tokenStorageService: TokenStorageService, public matDialog: MatDialog, private modalService: NgbModal) {
   }
 
   // fetch users on refresh
@@ -114,7 +116,7 @@ export class AppComponent {
   }
 
 
-  openModal() {
+  openCreateAdModal() {
     const dialogConfig = new MatDialogConfig();
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = true;
@@ -126,4 +128,8 @@ export class AppComponent {
   }
 
 
+  openContactModal(ad: Ad) {
+    const dialogConfig = this.modalService.open(ContactModalComponent);
+    dialogConfig.componentInstance.user = ad.user;
+  }
 }

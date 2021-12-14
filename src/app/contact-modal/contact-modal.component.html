@@ -1,0 +1,24 @@
+<div class="row">
+<div id="modal-content-wrapper">
+  <header id="modal-header">
+    <h1 id="modal-title">User {{user.username}}</h1>
+  </header>
+  <section id="modal-body">
+    <h3>Contact mail: {{user.email}}</h3>
+    <h3>Contact phone number: {{user.phoneNumber}}</h3>
+    <h3>Rating: {{user.rating}}</h3>
+  </section>
+
+  <form #addForm="ngForm" (ngSubmit)="onSendMessage(addForm)">
+    <div class="form-group">
+      <input type="content" ngModel class="form-control" name="content" id="content" [(ngModel)]="form.content" placeholder="Send query..."
+             required>
+    </div>
+
+  </form>
+  <footer id="modal-footer">
+    <button type="button" class="btn btn-success" (click)="sendMessage()">Send message</button>
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+  </footer>
+</div>
+</div>

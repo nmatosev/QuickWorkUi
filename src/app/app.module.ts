@@ -13,17 +13,18 @@ import {BoardAdminComponent} from './board-admin/board-admin.component';
 import {BoardUserComponent} from './board-user/board-user.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AdModalComponent} from './ad-modal/ad-modal.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {AdDetailsComponent} from './ad-details/ad-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ContactModalComponent } from './contact-modal/contact-modal.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'board-admin', component: BoardAdminComponent},
-  {path: 'userProfile/:username', component: UserProfileComponent},
+  {path: 'contactModal/:username', component: ContactModalComponent},
   //{path: '**', component: PageNotFoundComponent}
 ]
 
@@ -38,7 +39,8 @@ const routes: Routes = [
     AdModalComponent,
     UserProfileComponent,
     AdDetailsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ContactModalComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,10 @@ const routes: Routes = [
     MatDialogModule,
     BrowserAnimationsModule
   ],
-  providers: [ApiService, authInterceptorProviders],
+  providers: [ApiService, authInterceptorProviders, {
+    provide: MatDialogRef,
+    useValue: {}
+  }],
   bootstrap: [AppComponent],
   entryComponents: [AdModalComponent]
 

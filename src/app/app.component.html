@@ -11,7 +11,7 @@
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a (click)="openModal()" class="btn btn-info" *ngIf="isLoggedIn" class="nav-link">Create new ad </a>
+        <a (click)="openCreateAdModal()" class="btn btn-info" *ngIf="isLoggedIn" class="nav-link">Create new ad </a>
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
@@ -65,15 +65,16 @@
                   <h5 class="card-subtitle mb-2 text-muted ">{{ad?.county}}</h5>
                 </div>
                 <div class="tab-pane" id="userProfile">{{ad?.username}}</div>
-                <a [routerLink]="['/userProfile/', ad.username]" class="btn btn-primary stretched-link">Detalji</a>
+                <a (click)="openContactModal(ad)" class="btn btn-primary stretched-link">Contact</a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </header>
+    <router-outlet></router-outlet>
+
   </div>
-  <router-outlet></router-outlet>
 
   <div class="container" id="main-container">
 
@@ -111,7 +112,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
 
