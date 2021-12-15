@@ -132,4 +132,8 @@ export class AppComponent {
     const dialogConfig = this.modalService.open(ContactModalComponent);
     dialogConfig.componentInstance.user = ad.user;
   }
+
+  openReviewModal() {
+
+  }
 }
