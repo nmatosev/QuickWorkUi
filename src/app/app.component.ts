@@ -10,6 +10,7 @@ import {Ad} from "./ad";
 import {County} from "./county";
 import {ContactModalComponent} from "./contact-modal/contact-modal.component";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {LoginComponent} from "./login/login.component";
 
 @Component({
   selector: 'app-root',
@@ -135,5 +136,9 @@ export class AppComponent {
 
   openReviewModal() {
 
+  }
+
+  openLoginModal() {
+    const dialog = this.modalService.open(LoginComponent);
   }
 }

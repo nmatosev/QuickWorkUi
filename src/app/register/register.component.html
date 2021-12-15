@@ -73,7 +73,7 @@
       <div class="form-group">
         <label for="phoneNumber">Phone number</label>
         <input
-          type="password"
+          type="number"
           class="form-control"
           name="phoneNumber"
           [(ngModel)]="form.phoneNumber"
@@ -81,9 +81,8 @@
           minlength="9"
           #phoneNumber="ngModel"
         />
-        <div class="alert-danger" *ngIf="password.errors && f.submitted">
-          <div *ngIf="password.errors.required">Password is required</div>
-          <div *ngIf="password.errors.minlength">
+        <div class="alert-danger" *ngIf="phoneNumber.errors && f.submitted">
+          <div *ngIf="phoneNumber.errors.minlength">
             Password must be at least 6 characters
           </div>
         </div>
