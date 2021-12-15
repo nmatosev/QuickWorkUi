@@ -18,6 +18,8 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
 import {AdDetailsComponent} from './ad-details/ad-details.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ContactModalComponent } from './contact-modal/contact-modal.component';
+import { WriteReviewComponent } from './write-review/write-review.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -40,7 +42,9 @@ const routes: Routes = [
     UserProfileComponent,
     AdDetailsComponent,
     PageNotFoundComponent,
-    ContactModalComponent
+    ContactModalComponent,
+    WriteReviewComponent
+
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,8 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes),
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [ApiService, authInterceptorProviders, {
     provide: MatDialogRef,

@@ -1,31 +1,33 @@
-<div id="modal-content-wrapper">
-  <header id="modal-header">
-    <h1 id="modal-title">Create new ad</h1>
-  </header>
-  <section id="modal-body">
-    <p>Find your helper...</p>
-  </section>
-  <form #addForm="ngForm" (ngSubmit)="onSaveAd(addForm)">
-    <div class="form-group">
-      <label for="title">Title</label>
-      <input type="text" ngModel name="title" class="form-control" id="title" [(ngModel)]="form.title" placeholder="Title" required>
-    </div>
-    <div class="form-group">
-      <label for="content">Content</label>
-      <input type="content" ngModel class="form-control" name="content" id="content" [(ngModel)]="form.content" placeholder="Content" required>
-    </div>
-    <div class="form-group" name="county">
-      <!--TODO create picker-->
-      <option value="" disabled selected>Select county</option>
-      <select id="select-county" name="county" [(ngModel)]="selectedCounty">
-        <option *ngFor="let county of counties" [ngValue]="county">{{county.name}}</option>
-      </select>
-    </div>
+<div class="row">
+  <div id="modal-content-wrapper">
+    <header id="modal-header">
+      <h1 id="modal-title">Create new ad</h1>
+    </header>
+    <section id="modal-body">
+      <p>Find your helper...</p>
+    </section>
+    <form #addForm="ngForm" (ngSubmit)="onSaveAd(addForm)">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" ngModel name="title" class="form-control" id="title" [(ngModel)]="form.title" placeholder="Title" required>
+      </div>
+      <div class="form-group">
+        <label for="content">Content</label>
+        <input type="content" ngModel class="form-control" name="content" id="content" [(ngModel)]="form.content" placeholder="Content" required>
+      </div>
+      <div class="form-group" name="county">
+        <!--TODO create picker-->
+        <option value="" disabled selected>Select county</option>
+        <select id="select-county" name="county" [(ngModel)]="selectedCounty">
+          <option *ngFor="let county of counties" [ngValue]="county">{{county.name}}</option>
+        </select>
+      </div>
 
 
-  </form>
-  <footer id="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="submitAd()">Save changes</button>
-    <button type="button" class="btn btn-secondary" (click)="closeModal()">Go back</button>
-  </footer>
+    </form>
+    <footer id="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="submitAd()">Save changes</button>
+      <button type="button" class="btn btn-secondary" (click)="closeModal()">Go back</button>
+    </footer>
+  </div>
 </div>

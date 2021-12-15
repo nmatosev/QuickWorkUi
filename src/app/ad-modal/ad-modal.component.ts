@@ -4,6 +4,7 @@ import {County} from "../county";
 import {ApiService} from "../api.service";
 import {AdService} from "../_services/ad.service";
 import {TokenStorageService} from "../_services/token-storage.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-ad-modal',
@@ -19,7 +20,7 @@ export class AdModalComponent implements OnInit {
   };
   errorMessage = '';
 
-  constructor(private userService: ApiService, public dialogRef: MatDialogRef<AdModalComponent>, private adService: AdService,
+  constructor(private userService: ApiService, private modalService: NgbModal, private adService: AdService,
               private tokenStorageService: TokenStorageService) {
   }
 
@@ -58,7 +59,8 @@ export class AdModalComponent implements OnInit {
 
   // just close the modal
   closeModal() {
-    this.dialogRef.close();
+    this.modalService.dismissAll();
+
   }
 
 

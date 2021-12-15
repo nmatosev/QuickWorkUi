@@ -22,9 +22,6 @@ export class ContactModalComponent implements OnInit {
   @Input() public user: any;
 
   ngOnInit(): void {
-    console.log("msg from parent " + this.user.username);
-    console.log("msg from parent-phone " + this.user.phoneNumber);
-
   }
 
 

@@ -11,6 +11,8 @@ import {County} from "./county";
 import {ContactModalComponent} from "./contact-modal/contact-modal.component";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {LoginComponent} from "./login/login.component";
+import {RegisterComponent} from "./register/register.component";
+import {WriteReviewComponent} from "./write-review/write-review.component";
 
 @Component({
   selector: 'app-root',
@@ -118,14 +120,7 @@ export class AppComponent {
 
 
   openCreateAdModal() {
-    const dialogConfig = new MatDialogConfig();
-    // The user can't close the dialog by clicking outside its body
-    dialogConfig.disableClose = true;
-    dialogConfig.id = "modal-component";
-    dialogConfig.height = "350px";
-    dialogConfig.width = "600px";
-    // https://material.angular.io/components/dialog/overview
-    const modalDialog = this.matDialog.open(AdModalComponent, dialogConfig);
+    const dialog = this.modalService.open(AdModalComponent);
   }
 
 
@@ -134,11 +129,16 @@ export class AppComponent {
     dialogConfig.componentInstance.user = ad.user;
   }
 
-  openReviewModal() {
-
+  openReviewModal(ad: Ad) {
+    const dialog = this.modalService.open(WriteReviewComponent);
+    dialog.componentInstance.user = ad.user;
   }
 
   openLoginModal() {
     const dialog = this.modalService.open(LoginComponent);
+  }
+
+  openRegisterModal() {
+    const dialog = this.modalService.open(RegisterComponent);
   }
 }
