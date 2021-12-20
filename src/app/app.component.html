@@ -49,7 +49,7 @@
   <div class="container">
     <header class="jumbotron">
       <div class="row">
-        <div *ngFor="let ad of ads" from class="col-md-6 col-xl-3">
+        <div *ngFor="let ad of ads | paginate: { itemsPerPage: 3, currentPage: page }" from class="col-md-6 col-xl-3">
           <div class="card m-b-30">
             <div class="card-header">Aktivno do: {{ad?.validUntil}}
             </div>
@@ -72,6 +72,8 @@
           </div>
         </div>
       </div>
+      <pagination-controls (pageChange)="page = $event" ></pagination-controls>
+
     </header>
     <router-outlet></router-outlet>
 

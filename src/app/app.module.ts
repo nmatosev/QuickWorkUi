@@ -20,6 +20,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ContactModalComponent } from './contact-modal/contact-modal.component';
 import { WriteReviewComponent } from './write-review/write-review.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgxPaginationModule} from 'ngx-pagination';
+
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -53,7 +55,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatDialogModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    NgxPaginationModule
   ],
   providers: [ApiService, authInterceptorProviders, {
     provide: MatDialogRef,

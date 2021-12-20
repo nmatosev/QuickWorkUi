@@ -30,7 +30,7 @@ export class AppComponent {
   public ad: Ad;
   public users: User[];
   public counties: County[];
-
+  page: number = 1;
 
   constructor(private userService: ApiService, private tokenStorageService: TokenStorageService, public matDialog: MatDialog, private modalService: NgbModal) {
   }
