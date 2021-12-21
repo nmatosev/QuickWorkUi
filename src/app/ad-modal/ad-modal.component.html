@@ -8,12 +8,11 @@
     </section>
     <form #addForm="ngForm" (ngSubmit)="onSaveAd(addForm)">
       <div class="form-group">
-        <label for="title">Title</label>
         <input type="text" ngModel name="title" class="form-control" id="title" [(ngModel)]="form.title" placeholder="Title" required>
       </div>
       <div class="form-group">
-        <label for="content">Content</label>
-        <input type="content" ngModel class="form-control" name="content" id="content" [(ngModel)]="form.content" placeholder="Content" required>
+        <textarea type="content" ngModel class="form-control" name="content" id="content" [(ngModel)]="form.content" placeholder="Content..." required rows="4" cols="50">
+        </textarea>
       </div>
       <div class="form-group" name="county">
         <!--TODO create picker-->

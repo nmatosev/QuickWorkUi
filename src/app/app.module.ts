@@ -21,6 +21,7 @@ import { ContactModalComponent } from './contact-modal/contact-modal.component';
 import { WriteReviewComponent } from './write-review/write-review.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ReviewAlertComponent } from './review-alert/review-alert.component';
 
 
 const routes: Routes = [
@@ -45,7 +46,8 @@ const routes: Routes = [
     AdDetailsComponent,
     PageNotFoundComponent,
     ContactModalComponent,
-    WriteReviewComponent
+    WriteReviewComponent,
+    ReviewAlertComponent,
 
   ],
   imports: [

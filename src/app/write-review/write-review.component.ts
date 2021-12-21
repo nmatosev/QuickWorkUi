@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ReviewService} from "../review.service";
+import {ReviewAlertComponent} from "../review-alert/review-alert.component";
 
 @Component({
   selector: 'app-write-review',
@@ -15,7 +16,8 @@ export class WriteReviewComponent implements OnInit {
     content: null,
     rating: null
   };
-  isSuccessful = false;
+  isSuccessful:boolean = false;
+  alert:boolean = false;
   errorMessage = '';
 
   @Input() public user: any;
@@ -40,15 +42,23 @@ export class WriteReviewComponent implements OnInit {
       data => {
         console.log(data);
         this.isSuccessful = true;
+        console.log("succ " + this.isSuccessful);
       },
       err => {
         this.errorMessage = err.error.message;
+        this.alert = true;
+        console.log("alert " + this.alert + " errorMessage " + this.errorMessage);
+
       }
     );
     this.closeModal();
+    const dialog = this.modalService.open(ReviewAlertComponent);
+    dialog.componentInstance.isSuccessful = this.isSuccessful;
+    dialog.componentInstance.alert = this.alert;
   }
 
   onSaveReview(addForm: any) {
-
   }
+
+
 }

@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     const {username, password} = this.form;
-    console.log("on sumb " + username);
     this.authService.login(username, password).subscribe(
       data => {
         console.log("submit " + JSON.stringify(data))
@@ -42,6 +41,7 @@ export class LoginComponent implements OnInit {
         this.reloadPage();
       },
       err => {
+        console.log("login failed")
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }
