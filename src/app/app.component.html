@@ -49,7 +49,7 @@
   <div class="container">
     <header class="jumbotron">
       <div class="row">
-        <div *ngFor="let ad of ads | paginate: { itemsPerPage: 3, currentPage: page }" from class="col-md-6 col-xl-3">
+        <div *ngFor="let ad of ads | paginate: { itemsPerPage: 10, currentPage: page }" from class="col-md-6 col-xl-3">
           <div class="card m-b-30">
             <div class="card-header">Aktivno do: {{ad?.validUntil}}
             </div>
@@ -64,7 +64,7 @@
                   <h5 class="card-subtitle mb-2 text-muted ">{{ad?.county}}</h5>
                 </div>
                 <div class="tab-pane" id="userProfile">{{ad?.username}}</div>
-                <a (click)="openContactModal(ad)" class="btn btn-primary">Contact</a>
+                <a (click)="openContactModal(ad)" *ngIf="isLoggedIn" class="btn btn-primary">Contact</a>
                 <button (click)="openReviewModal(ad)" *ngIf="isLoggedIn" type="button" class="btn btn-dark">Rate</button>
 
 

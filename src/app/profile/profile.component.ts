@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TokenStorageService } from '../_services/token-storage.service';
+import { SendMessageService } from '../send-message.service';
+import { Message } from "../message";
+
 
 @Component({
   selector: 'app-profile',
@@ -9,11 +12,22 @@ import { TokenStorageService } from '../_services/token-storage.service';
 })
 export class ProfileComponent implements OnInit {
   currentUser: any;
+  public messages: Message[];
+  content: string;
 
-  constructor(private token: TokenStorageService) { }
+  constructor(private token: TokenStorageService, private messageService: SendMessageService) { }
 
   ngOnInit() {
-    console.log("user prof compon"+ JSON.stringify(this.token.getUser()))
     this.currentUser = this.token.getUser();
+
+    this.messageService.getMessagesForUser().subscribe(
+      (response: Message[]) => {
+        this.messages = response;
+
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
   }
 }

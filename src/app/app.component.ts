@@ -125,8 +125,12 @@ export class AppComponent {
 
 
   openContactModal(ad: Ad) {
-    const dialogConfig = this.modalService.open(ContactModalComponent);
-    dialogConfig.componentInstance.user = ad.user;
+    const dialog = this.modalService.open(ContactModalComponent);
+    console.log("contact modal - ad id" + ad.id + " sender " + this.username)
+    dialog.componentInstance.user = ad.user;
+    dialog.componentInstance.adId = ad.id;
+    dialog.componentInstance.sender = this.username;
+
   }
 
   openReviewModal(ad: Ad) {

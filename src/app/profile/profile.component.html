@@ -19,6 +19,14 @@
       {{ role }}
     </li>
   </ul>
+  <h3>
+    <strong>Received messages</strong>
+    <ul>
+      <li *ngFor="let message of messages">
+        {{ message.messageContent }}
+      </li>
+    </ul>
+  </h3>
 </div>
 
 <ng-template #loggedOut>

@@ -22,6 +22,7 @@ import { WriteReviewComponent } from './write-review/write-review.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ReviewAlertComponent } from './review-alert/review-alert.component';
+import { MessageAlertComponent } from './message-alert/message-alert.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,7 @@ const routes: Routes = [
     ContactModalComponent,
     WriteReviewComponent,
     ReviewAlertComponent,
+    MessageAlertComponent,
 
   ],
   imports: [

@@ -17,10 +17,7 @@ export class ReviewAlertComponent implements OnInit {
 
 
   closeModal() {
-     console.log("alert " + this.alert);
-     console.log("succ " + this.isSuccessful);
      this.modalService.dismissAll();
-
   }
 
 }

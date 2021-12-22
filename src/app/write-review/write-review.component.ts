@@ -35,7 +35,6 @@ export class WriteReviewComponent implements OnInit {
 
   }
 
-
   submitReview(): void {
     const {content, rating} = this.form;
     this.reviewService.sendReview("-", this.user.username, content, rating).subscribe(
