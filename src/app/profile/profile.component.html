@@ -21,11 +21,10 @@
   </ul>
   <h3>
     <strong>Received messages</strong>
-    <ul>
-      <li *ngFor="let message of messages">
-        {{ message.messageContent }}
+      <li class="list-group-item" *ngFor="let message of messages">
+        <h3>{{ message.messageContent }}</h3>
+        <h4>Sender: {{ message.sender }}</h4>
       </li>
-    </ul>
   </h3>
 </div>
 

@@ -19,8 +19,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.token.getUser();
-
-    this.messageService.getMessagesForUser().subscribe(
+    console.log("currentUser " + this.currentUser.username)
+    this.messageService.getMessagesForUser(this.currentUser.username).subscribe(
       (response: Message[]) => {
         this.messages = response;
 
