@@ -18,6 +18,7 @@ export class ContactModalComponent implements OnInit {
   alert:boolean = false;
   errorMessage = '';
   username: any;
+  @Input() public loggedIn: boolean;
   @Input() public user: any;
   @Input() public adId: number;
   @Input() public sender: string;

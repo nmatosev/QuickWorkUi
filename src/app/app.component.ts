@@ -130,6 +130,7 @@ export class AppComponent {
     dialog.componentInstance.user = ad.user;
     dialog.componentInstance.adId = ad.id;
     dialog.componentInstance.sender = this.username;
+    dialog.componentInstance.loggedIn = this.isLoggedIn;
 
   }
 

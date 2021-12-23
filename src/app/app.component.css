@@ -1,29 +1,21 @@
 #app {
   background-color: #53a4f0;
 }
-.card-text {
-  margin-left: 20px;
+
+
+.card-body {
+  margin-left: 10px;
 }
 
-.card-subtitle {
-  margin-left: 20px;
-}
-
-.card-link {
-  margin-left: 20px;
-}
-
-.card-title {
-  margin-top: 5px;
-  margin-left: 20px;
-}
+* {
+  box-sizing: border-box
+} 
 
 .btn {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 82%;
-  margin-top: 5px;
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;  margin-top: 5px;
 }
 
 .btn-dark {

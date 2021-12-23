@@ -11,17 +11,14 @@
 
     <form #addForm="ngForm" (ngSubmit)="onSendMessage(addForm)">
       <div class="form-group">
-        <!--<input type="content" ngModel class="form-control" name="content" id="content" [(ngModel)]="form.content"
-               placeholder="Send query..."
-               required>-->
-        <textarea ngModel class="form-control" name="messageContent" id="messageContent" [(ngModel)]="form.messageContent" rows="4" cols="50"
+        <textarea *ngIf="loggedIn" ngModel class="form-control" name="messageContent" id="messageContent" [(ngModel)]="form.messageContent" rows="4" cols="50"
                   placeholder="Send message..."></textarea>
 
       </div>
 
     </form>
     <footer id="modal-footer">
-      <button type="button" class="btn btn-success" (click)="sendMessage()">Send message</button>
+      <button *ngIf="loggedIn" type="button" class="btn btn-success" (click)="sendMessage()">Send message</button>
       <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
     </footer>
   </div>
