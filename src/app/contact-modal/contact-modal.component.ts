@@ -26,8 +26,6 @@ export class ContactModalComponent implements OnInit {
   constructor(private router: ActivatedRoute, private modalService: NgbModal, private sendMessageService: SendMessageService) {
   }
 
-
-
   ngOnInit(): void {
   }
 

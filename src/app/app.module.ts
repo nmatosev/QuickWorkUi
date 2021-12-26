@@ -23,12 +23,16 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ReviewAlertComponent } from './review-alert/review-alert.component';
 import { MessageAlertComponent } from './message-alert/message-alert.component';
+import { AdMessagesComponent } from './ad-messages/ad-messages.component';
+import { AdMessagesDetailsComponent } from './ad-messages-details/ad-messages-details.component';
 
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'adMessages', component: AdMessagesComponent},
+  {path: 'adMessages/adMessagesDetails', component: AdMessagesDetailsComponent},
   {path: 'board-admin', component: BoardAdminComponent},
   {path: 'contactModal/:username', component: ContactModalComponent},
   //{path: '**', component: PageNotFoundComponent}
@@ -50,6 +54,8 @@ const routes: Routes = [
     WriteReviewComponent,
     ReviewAlertComponent,
     MessageAlertComponent,
+    AdMessagesComponent,
+    AdMessagesDetailsComponent,
 
   ],
   imports: [

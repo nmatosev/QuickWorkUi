@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { SendMessageService } from '../send-message.service';
 import { Message } from "../message";
-
+import { AdMessage } from "../ad-message";
+import Pusher from 'pusher-js';
 
 @Component({
   selector: 'app-profile',
@@ -12,22 +13,18 @@ import { Message } from "../message";
 })
 export class ProfileComponent implements OnInit {
   currentUser: any;
-  public messages: Message[];
-  content: string;
+  errorMessage = '';
+  data: any
 
-  constructor(private token: TokenStorageService, private messageService: SendMessageService) { }
+  form: any = {
+    messageContent: null,
+  };
+
+  constructor(private token: TokenStorageService) { }
 
   ngOnInit() {
     this.currentUser = this.token.getUser();
     console.log("currentUser " + this.currentUser.username)
-    this.messageService.getMessagesForUser(this.currentUser.username).subscribe(
-      (response: Message[]) => {
-        this.messages = response;
-
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    );
   }
+
 }

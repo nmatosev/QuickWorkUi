@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Message} from "./message";
+import {AdMessage} from "./ad-message";
 import {environment} from '../environments/environment';
 
 const httpOptions = {
@@ -24,7 +25,7 @@ export class SendMessageService {
     }, httpOptions);
   }
 
-  public getMessagesForUser(username: string): Observable<Message[]> {
-    return this.http.get<Message[]>(`${this.apiServerUrl}/public/${username}`)
+  public getMessagesForUser(username: string): Observable<AdMessage[]> {
+    return this.http.get<AdMessage[]>(`${this.apiServerUrl}/public/${username}`)
   }
 }
