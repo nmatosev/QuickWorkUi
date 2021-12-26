@@ -25,9 +25,12 @@ import { ReviewAlertComponent } from './review-alert/review-alert.component';
 import { MessageAlertComponent } from './message-alert/message-alert.component';
 import { AdMessagesComponent } from './ad-messages/ad-messages.component';
 import { AdMessagesDetailsComponent } from './ad-messages-details/ad-messages-details.component';
+import { HomeComponent } from './home/home.component';
 
 
 const routes: Routes = [
+  {path: '', redirectTo: 'home',  pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
@@ -56,6 +59,7 @@ const routes: Routes = [
     MessageAlertComponent,
     AdMessagesComponent,
     AdMessagesDetailsComponent,
+    HomeComponent,
 
   ],
   imports: [

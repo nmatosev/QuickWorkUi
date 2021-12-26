@@ -1,0 +1,29 @@
+<div class="container">
+  <header class="jumbotron">
+    <div class="row">
+      <div *ngFor="let ad of ads | paginate: { itemsPerPage: 10, currentPage: page }" from class="col-md-6 col-xl-3">
+        <div class="card m-b-30">
+          <div class="card-header">Aktivno do: {{ad?.validUntil}}
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+
+              <div class="tab-pane active"  id="ad">
+                <h2 class="card-title">{{ad?.title}}</h2>
+                <p class="card-text">{{ad?.content}}</p>
+                <p class="card-text"></p>
+                <a href="#" class="card-link">{{ad?.username}}</a>
+                <h5 class="card-subtitle mb-2 text-muted ">{{ad?.county}}</h5>
+              </div>
+              <div class="tab-pane" id="userProfile">{{ad?.username}}</div>
+              <li (click)="openContactModal(ad)" class="list-group-item"><i class="fa fa-envelope float-right"></i>{{ad?.user?.username}}<a href="#"></a></li>
+              <button (click)="openReviewModal(ad)" *ngIf="isLoggedIn" type="button" class="btn btn-primary">Rate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pagination-controls (pageChange)="page = $event" ></pagination-controls>
+  </header>
+
+</div>
