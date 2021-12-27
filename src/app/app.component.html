@@ -16,12 +16,8 @@
         <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
       </li>
       <li class="nav-item">
-        <form class="form-inline my-2 my-lg-0">
-          <input type="search" (ngModelChange)="searchAds(key.value)" #key="ngModel" ngModel=""
-                 name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search..." required>
-        </form>
-      </li>
 
+      </li>
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
@@ -61,13 +57,6 @@
     <!-- Copyright -->
   </footer>
 
-  <!-- Notification for no active ads -->
-  <div *ngIf="ads?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
-    <div class="alert alert-info" role="alert">
-      <h4 class="alert-heading">NO ACTIVE ADS!</h4>
-      <p>There is no active ads at the moment.</p>
-    </div>
-  </div>
 
 
 

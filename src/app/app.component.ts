@@ -25,9 +25,7 @@ export class AppComponent {
   isLoggedIn = false;
   showAdminBoard = false;
   username?: string;
-  public ads: Ad[];
   content: string;
-  public ad: Ad;
   public users: User[];
   public counties: County[];
   page: number = 1;
@@ -44,23 +42,9 @@ export class AppComponent {
     if (this.isLoggedIn) {
 
       const loggedUser = this.tokenStorageService.getUser();
-
       this.roles = loggedUser.roles;
-      console.log("user roles" + JSON.stringify(loggedUser));
-      //this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-
       this.username = loggedUser.username;
-
     }
-
-    this.userService.getActiveAds().subscribe(
-      (response: Ad[]) => {
-        this.ads = response;
-      },
-      err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    );
 
     this.userService.getCounties().subscribe(
       (response: County[]) => {
@@ -89,55 +73,11 @@ export class AppComponent {
     )
   }
 
-  public getAds(): void {
-    this.userService.getActiveAds().subscribe(
-      (response: Ad[]) => {
-        this.ads = response;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    )
-  }
-
-  public searchAds(key: string): void {
-
-    const results: Ad[] = [];
-    for (const ad of this.ads) {
-      if (ad.content.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        ad.title.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
-        results.push(ad);
-      }
-    }
-
-    this.ads = results;
-
-    if(results.length === 0 || !key) {
-      console.log(this.userService.getActiveAds())
-      this.getAds();
-    }
-  }
-
 
   openCreateAdModal() {
     const dialog = this.modalService.open(AdModalComponent);
   }
 
-
-  openContactModal(ad: Ad) {
-    const dialog = this.modalService.open(ContactModalComponent);
-    console.log("contact modal - ad id" + ad.id + " sender " + this.username)
-    dialog.componentInstance.user = ad.user;
-    dialog.componentInstance.adId = ad.id;
-    dialog.componentInstance.sender = this.username;
-    dialog.componentInstance.loggedIn = this.isLoggedIn;
-
-  }
-
-  openReviewModal(ad: Ad) {
-    const dialog = this.modalService.open(WriteReviewComponent);
-    dialog.componentInstance.user = ad.user;
-  }
 
   openLoginModal() {
     const dialog = this.modalService.open(LoginComponent);

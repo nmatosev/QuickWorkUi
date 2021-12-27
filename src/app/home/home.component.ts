@@ -3,14 +3,11 @@ import {User} from '../user';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ApiService} from '../api.service';
 import {TokenStorageService} from '../_services/token-storage.service';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AdModalComponent} from '../ad-modal/ad-modal.component';
 import {Ad} from "../ad";
 import {County} from "../county";
 import {ContactModalComponent} from "../contact-modal/contact-modal.component";
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {LoginComponent} from "../login/login.component";
-import {RegisterComponent} from "../register/register.component";
 import {WriteReviewComponent} from "../write-review/write-review.component";
 
 @Component({
@@ -20,7 +17,6 @@ import {WriteReviewComponent} from "../write-review/write-review.component";
 })
 export class HomeComponent implements OnInit  {
 
-  title = 'quickworkui';
   private roles: string[];
   isLoggedIn = false;
   showAdminBoard = false;
@@ -32,7 +28,7 @@ export class HomeComponent implements OnInit  {
   public counties: County[];
   page: number = 1;
 
-  constructor(private userService: ApiService, private tokenStorageService: TokenStorageService, public matDialog: MatDialog, private modalService: NgbModal) { }
+  constructor(private userService: ApiService, private tokenStorageService: TokenStorageService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
       this.getUsers();
@@ -45,7 +41,6 @@ export class HomeComponent implements OnInit  {
         this.roles = loggedUser.roles;
         console.log("user roles" + JSON.stringify(loggedUser));
         //this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-
         this.username = loggedUser.username;
 
       }
@@ -81,30 +76,48 @@ export class HomeComponent implements OnInit  {
     )
   }
 
-    public getUsers(): void {
-      this.userService.getUsers().subscribe(
-        (response: User[]) => {
-          this.users = response;
-        },
-        (error: HttpErrorResponse) => {
-          alert(error.message);
-        }
-      )
+  public getUsers(): void {
+    this.userService.getUsers().subscribe(
+      (response: User[]) => {
+        this.users = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
+  public searchAds(key: string): void {
+
+    const results: Ad[] = [];
+    for (const ad of this.ads) {
+      if (ad.content.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        ad.title.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(ad);
+      }
     }
 
-      openContactModal(ad: Ad) {
-        const dialog = this.modalService.open(ContactModalComponent);
-        console.log("contact modal - ad id" + ad.id + " sender " + this.username)
-        dialog.componentInstance.user = ad.user;
-        dialog.componentInstance.adId = ad.id;
-        dialog.componentInstance.sender = this.username;
-        dialog.componentInstance.loggedIn = this.isLoggedIn;
+    this.ads = results;
 
-      }
+    if(results.length === 0 || !key) {
+      console.log(this.userService.getActiveAds())
+      this.getAds();
+    }
+  }
 
-      openReviewModal(ad: Ad) {
-        const dialog = this.modalService.open(WriteReviewComponent);
-        dialog.componentInstance.user = ad.user;
-      }
+  openContactModal(ad: Ad) {
+    const dialog = this.modalService.open(ContactModalComponent);
+    console.log("contact modal - ad id" + ad.id + " sender " + this.username)
+    dialog.componentInstance.user = ad.user;
+    dialog.componentInstance.adId = ad.id;
+    dialog.componentInstance.sender = this.username;
+    dialog.componentInstance.loggedIn = this.isLoggedIn;
+
+  }
+
+  openReviewModal(ad: Ad) {
+    const dialog = this.modalService.open(WriteReviewComponent);
+    dialog.componentInstance.user = ad.user;
+  }
 
 }

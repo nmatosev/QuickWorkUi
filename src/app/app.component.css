@@ -3,21 +3,3 @@
 }
 
 
-.card-body {
-  margin-left: 10px;
-}
-
-* {
-  box-sizing: border-box
-} 
-
-.btn {
-  display: block;
-  margin: 10px 0;
-  padding: 10px;
-  width: 100%;  margin-top: 5px;
-}
-
-.btn-dark {
-  text-decoration-color: white;
-}

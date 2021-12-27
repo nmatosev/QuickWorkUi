@@ -28,4 +28,8 @@ export class SendMessageService {
   public getMessagesForUser(username: string): Observable<AdMessage[]> {
     return this.http.get<AdMessage[]>(`${this.apiServerUrl}/public/${username}`)
   }
+
+  public getMessagesForUserOnAd(username: string, adId:number): Observable<Message[]> {
+    return this.http.get<Message[]>(`${this.apiServerUrl}/public/${adId}/${username}`)
+  }
 }

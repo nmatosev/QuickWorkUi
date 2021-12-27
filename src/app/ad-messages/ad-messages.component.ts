@@ -38,18 +38,5 @@ export class AdMessagesComponent implements OnInit {
     console.log("messages " + this.adMessages)
   }
 
-  sendMessage(): void {
-    const messageContent = this.form.messageContent;
-    console.log("send Message - ad id " );
-    this.messageService.sendMessage(1, messageContent, "").subscribe(
-      data => {
-       console.log(data);
-      },
-      err => {
-       this.errorMessage = err.error.message;
-      }
-    );
-
-  }
 
 }
