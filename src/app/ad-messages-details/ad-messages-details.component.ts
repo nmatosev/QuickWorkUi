@@ -15,6 +15,7 @@ export class AdMessagesDetailsComponent implements OnInit {
   errorMessage = '';
   loggedUser : any;
   adId: number;
+  text: "";
 
   form: any = {
     messageReply: null,
@@ -56,6 +57,7 @@ export class AdMessagesDetailsComponent implements OnInit {
         this.errorMessage = JSON.parse(err.error).message;
       }
     );*/
+    this.form.messageReply = "";
     console.log("reloaded " + JSON.stringify(this.messages));
     const newMessage = <Message>({
         messageContent: messageContent,

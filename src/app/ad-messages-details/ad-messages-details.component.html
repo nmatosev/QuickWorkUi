@@ -1,5 +1,5 @@
-<div class="w-50 p-3">
-  <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">
+<div style="width: 380px;">
+  <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" >
     <div class="list-group list-group-flush border-bottom scrollArea">
       <div class="list-group-item list-group-item-action py-3 lh-tight" *ngFor="let message of messages">
         <div class="d-flex w-100 align-items-center justify-content-between">
@@ -11,7 +11,7 @@
     </div>
   </div>
   <form>
-    <input class="form-control" placeholder="Write a reply" [(ngModel)]="form.messageReply" [ngModelOptions]="{standalone: true}" />
+    <input class="form-control" placeholder="Write a reply" [(ngModel)]="form.messageReply" [ngModelOptions]="{standalone: true}"/>
   </form>
   <button type="button" class="btn btn-primary btn-block" (click)="sendMessage()">Send message</button>
 
