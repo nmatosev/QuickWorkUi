@@ -2,7 +2,8 @@
 <div id="app">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a href="/home" class="navbar-brand" style="color:white;">Quick work</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02"
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+            aria-controls="navbarColor02"
             aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -16,7 +17,6 @@
         <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
       </li>
       <li class="nav-item">
-
       </li>
     </ul>
 
@@ -31,22 +31,27 @@
 
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
       <div class="dropdown">
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle show" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle show"
+           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
           <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
           <strong>{{username}}</strong>
         </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow show" aria-labelledby="dropdownUser1" style="" data-popper-placement="top-start">
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow show" aria-labelledby="dropdownUser" style=""
+            data-popper-placement="top-start">
           <li><a href="/adMessages" class="dropdown-item">Messages</a></li>
           <li><a href="/profile" class="dropdown-item">Profile</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a href="/" class="dropdown-item" (click)="logout()">Sign out</a></li>
         </ul>
       </div>
     </ul>
   </nav>
+  <body class="d-flex flex-column min-vh-100">
 
-  <router-outlet></router-outlet>
-
+    <router-outlet></router-outlet>
+  </body>
 
   <footer class="bg-light text-center text-lg-start">
     <!-- Copyright -->
