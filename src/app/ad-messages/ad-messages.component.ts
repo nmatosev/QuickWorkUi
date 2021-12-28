@@ -29,13 +29,12 @@ export class AdMessagesComponent implements OnInit {
     this.messageService.getMessagesForUser(this.currentUser.username).subscribe(
       (response: AdMessage[]) => {
         this.adMessages = response;
-
       },
       err => {
         this.content = JSON.parse(err.error).message;
       }
     );
-    console.log("messages " + this.adMessages)
+    console.log("ad messages " + this.adMessages)
   }
 
 

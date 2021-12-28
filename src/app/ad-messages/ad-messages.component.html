@@ -4,12 +4,12 @@
       <input lass="fs-5 fw-semibold" [(ngModel)]="currentUser.username" />
     </div>
     <div class="list-group list-group-flush border-bottom scrollArea">
-      <div class="list-group-item list-group-item-action py-3 lh-tight" *ngFor="let ad of adMessages">
-        <div href="/adMessagesDetails" routerLink="adMessagesDetails" [state]="ad.messages"  class="d-flex w-100 align-items-center justify-content-between">
-          <strong class="mb-1">{{ ad.title }}</strong>
-          <small class="text-muted">Tues</small>
+      <div class="list-group-item list-group-item-action py-3 lh-tight" *ngFor="let adMessage of adMessages">
+        <div href="/adMessagesDetails" routerLink="adMessagesDetails" [state]="adMessage.messages"  class="d-flex w-100 align-items-center justify-content-between">
+          <strong class="mb-1">{{ adMessage.title }}</strong>
+          <small class="text-muted">{{ adMessage.messages[adMessage.messages.length-1].weekDay }}</small>
         </div>
-        <div class="col-10 mb-1 big">{{ ad.messages[ad.messages.length-1].messageContent}}</div>
+        <div class="col-10 mb-1 big">{{ adMessage.messages[adMessage.messages.length-1].messageContent }}</div>
       </div>
     </div>
   </div>

@@ -3,4 +3,5 @@ export interface Message {
   messageContent: string;
   sender: string;
   adId: number;
+  weekDay: string;
 }
