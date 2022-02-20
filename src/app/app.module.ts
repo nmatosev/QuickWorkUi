@@ -5,6 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {authInterceptorProviders} from './_helpers/auth.interceptor';
 import {AppComponent} from './app.component';
 import {ApiService} from './api.service';
+import {MessageDataService} from "./messageDataService";
 import {FormsModule} from '@angular/forms';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
@@ -16,25 +17,25 @@ import {AdModalComponent} from './ad-modal/ad-modal.component';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {AdDetailsComponent} from './ad-details/ad-details.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ContactModalComponent } from './contact-modal/contact-modal.component';
-import { WriteReviewComponent } from './write-review/write-review.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {ContactModalComponent} from './contact-modal/contact-modal.component';
+import {WriteReviewComponent} from './write-review/write-review.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {NgxPaginationModule} from 'ngx-pagination';
-import { ReviewAlertComponent } from './review-alert/review-alert.component';
-import { MessageAlertComponent } from './message-alert/message-alert.component';
-import { AdMessagesComponent } from './ad-messages/ad-messages.component';
-import { AdMessagesDetailsComponent } from './ad-messages-details/ad-messages-details.component';
-import { HomeComponent } from './home/home.component';
+import {ReviewAlertComponent} from './review-alert/review-alert.component';
+import {MessageAlertComponent} from './message-alert/message-alert.component';
+import {AdChatComponent} from './ad-messages/ad-chat.component';
+import {AdMessagesDetailsComponent} from './ad-messages-details/ad-messages-details.component';
+import {HomeComponent} from './home/home.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'home',  pathMatch: 'full'},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'adMessages', component: AdMessagesComponent},
+  {path: 'adMessages', component: AdChatComponent},
   {path: 'adMessages/adMessagesDetails', component: AdMessagesDetailsComponent},
   {path: 'board-admin', component: BoardAdminComponent},
   {path: 'contactModal/:username', component: ContactModalComponent},
@@ -57,7 +58,7 @@ const routes: Routes = [
     WriteReviewComponent,
     ReviewAlertComponent,
     MessageAlertComponent,
-    AdMessagesComponent,
+    AdChatComponent,
     AdMessagesDetailsComponent,
     HomeComponent,
 
@@ -72,7 +73,8 @@ const routes: Routes = [
     NgbModule,
     NgxPaginationModule
   ],
-  providers: [ApiService, authInterceptorProviders, {
+  providers: [ApiService, MessageDataService,
+    authInterceptorProviders, {
     provide: MatDialogRef,
     useValue: {}
   }],

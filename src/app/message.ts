@@ -1,7 +1,8 @@
 export interface Message {
   id: number;
   messageContent: string;
-  sender: string;
+  user1: string;
+  user2: string;
   adId: number;
   weekDay: string;
 }

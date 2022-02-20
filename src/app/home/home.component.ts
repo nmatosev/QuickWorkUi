@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit  {
 
   openContactModal(ad: Ad) {
     const dialog = this.modalService.open(ContactModalComponent);
-    console.log("contact modal - ad id" + ad.id + " sender " + this.username)
+    console.log("contact modal - ad id " + ad.id + " sender " + this.username)
     dialog.componentInstance.user = ad.user;
     dialog.componentInstance.adId = ad.id;
     dialog.componentInstance.sender = this.username;

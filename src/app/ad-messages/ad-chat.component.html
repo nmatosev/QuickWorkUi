@@ -1,17 +1,20 @@
 <div style="width: 380px;">
   <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
     <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-      <input lass="fs-5 fw-semibold" [(ngModel)]="currentUser.username" />
+      <input class="fs-5 fw-semibold" [(ngModel)]="currentUser.username" />
     </div>
     <div class="list-group list-group-flush border-bottom scrollArea">
+      <!--We want to show last message in the chat-->
       <div class="list-group-item list-group-item-action py-3 lh-tight" *ngFor="let adMessage of adMessages">
         <div href="/adMessagesDetails" routerLink="adMessagesDetails" [state]="adMessage.messages"  class="d-flex w-100 align-items-center justify-content-between">
           <strong class="mb-1">{{ adMessage.title }}</strong>
           <small class="text-muted">{{ adMessage.messages[adMessage.messages.length-1].weekDay }}</small>
         </div>
+        <div class="col-10 mb-1 big">{{ adMessage.messages[adMessage.messages.length-1].user1 }}:</div>
         <div class="col-10 mb-1 big">{{ adMessage.messages[adMessage.messages.length-1].messageContent }}</div>
       </div>
     </div>
   </div>
-
 </div>
+
+
