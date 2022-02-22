@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
 import { TokenStorageService } from '../_services/token-storage.service';
-import { SendMessageService } from '../send-message.service';
-import { Message } from "../message";
-import { AdChat } from "../ad-chat";
-import Pusher from 'pusher-js';
 
 @Component({
   selector: 'app-profile',

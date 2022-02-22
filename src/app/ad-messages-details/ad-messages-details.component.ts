@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, NavigationStart} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Message} from "../message";
 import {SendMessageService} from '../send-message.service';
 import {TokenStorageService} from '../_services/token-storage.service';
@@ -13,7 +13,7 @@ import {MessageDataService} from "../messageDataService";
 })
 export class AdMessagesDetailsComponent implements OnInit {
   messageReply: string;
-  public adMessages: AdChat[];
+  public adChats: AdChat[];
   public messages: Message[];
 
   content: string;
@@ -34,34 +34,21 @@ export class AdMessagesDetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    //this.messages = Object.values(history.state);
     this.loggedUser = this.tokenStorageService.getUser();
 
     this.messages = this.messageDataService.messages;
-    this.adId = this.messages[0].adId;
-    console.log(" parent msgs " + this.messageDataService.messages[0].messageContent);
-
-    //dobacit adId ovdje
-    /*    this.messageService.getMessagesForUserOnAd(this.loggedUser.username, this.adId).subscribe(
-          (response: Message[]) => {
-            this.messages = response;
-          },
-          err => {
-            this.content = JSON.parse(err.error).message;
-          }
-        );
-        if (this.adMessages.length > 0) {
-          this.adId = this.adMessages[0].adId;
-          console.log("1ad id " + this.adId + " username " + this.loggedUser.username + " msg " + this.adMessages[0].content)
-          this.adMessages.splice(this.adMessages.length - 1, 1);
-        }*/
+    this.adId = this.messageDataService.adId;
+    this.messages.forEach(
+      p=> {
+        console.log("msgs in chat " + p.messageContent + " for ad id " + p.adId);
+      }
+    )
   }
 
   sendMessage(): void {
     const messageContent = this.form.messageReply;
     let sender = this.messages[0].user1;
     console.log("send Message - ad id " + this.adId + " msg " + messageContent + " from user " + sender);
-
     this.messageService.sendMessage(this.adId, messageContent, sender).subscribe(
       data => {
         console.log("Sending" + data);

@@ -24,7 +24,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ReviewAlertComponent} from './review-alert/review-alert.component';
 import {MessageAlertComponent} from './message-alert/message-alert.component';
-import {AdChatComponent} from './ad-messages/ad-chat.component';
+import {AdChatComponent} from './ad-chat/ad-chat.component';
 import {AdMessagesDetailsComponent} from './ad-messages-details/ad-messages-details.component';
 import {HomeComponent} from './home/home.component';
 
@@ -35,8 +35,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'adMessages', component: AdChatComponent},
-  {path: 'adMessages/adMessagesDetails', component: AdMessagesDetailsComponent},
+  {path: 'adChat', component: AdChatComponent},
+  {path: 'adChat/adMessagesDetails/:adId', component: AdMessagesDetailsComponent},
   {path: 'board-admin', component: BoardAdminComponent},
   {path: 'contactModal/:username', component: ContactModalComponent},
   //{path: '**', component: PageNotFoundComponent}

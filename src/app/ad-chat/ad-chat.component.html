@@ -1,0 +1,22 @@
+<div style="width: 380px;">
+  <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
+    <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+      <input class="fs-5 fw-semibold" [(ngModel)]="currentUser.username" />
+    </div>
+    <div class="list-group list-group-flush border-bottom scrollArea">
+      <!--We want to show last message in the chat-->
+      <div class="list-group-item list-group-item-action py-3 lh-tight" *ngFor="let adChat of adChats">
+        <!--figure out how to get separate chat window for every chat-->
+        <div (click)="clickOnChat(adChat.adId)" routerLink="adMessagesDetails/{{adChat.adId}}" [state]="adChat.messages"
+             class="d-flex w-100 align-items-center justify-content-between">
+          <strong class="mb-1">{{ adChat.title }}</strong>
+          <small class="text-muted">{{ adChat.messages[adChat.messages.length-1].weekDay }}</small>
+        </div>
+        <div class="col-10 mb-1 big">{{ adChat.messages[adChat.messages.length-1].user1 }}:</div>
+        <div class="col-10 mb-1 big">{{ adChat.messages[adChat.messages.length-1].messageContent }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
