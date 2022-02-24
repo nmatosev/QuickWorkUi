@@ -17,11 +17,20 @@ export class SendMessageService {
   constructor(private http: HttpClient) { }
   username: string;
 
-  sendMessage(adId: number, messageContent: string, sender:string): Observable<any> {
+  sendMessageModal(adId: number, messageContent: string, sender:string): Observable<any> {
     return this.http.post(this.apiServerUrl + '/public/sendMessage', {
       adId: adId,
       messageContent: messageContent,
       sender: sender
+    }, httpOptions);
+  }
+
+  sendMessageChat(adId: number, messageContent: string, sender:string, receiver:string): Observable<any> {
+    return this.http.post(this.apiServerUrl + '/public/sendMessage', {
+      adId: adId,
+      messageContent: messageContent,
+      sender: sender,
+      receiver: receiver
     }, httpOptions);
   }
 

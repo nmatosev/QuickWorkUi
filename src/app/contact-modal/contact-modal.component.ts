@@ -33,7 +33,7 @@ export class ContactModalComponent implements OnInit {
   sendMessage(): void {
     const messageContent = this.form.messageContent;
     console.log("send Message - ad id " + this.adId + " msg " + messageContent + " sender " + this.sender);
-    this.sendMessageService.sendMessage(this.adId, messageContent, this.sender).subscribe(
+    this.sendMessageService.sendMessageModal(this.adId, messageContent, this.sender).subscribe(
       data => {
        console.log(data);
        this.isSuccessful = true;

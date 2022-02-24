@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Message} from "../message";
 import {SendMessageService} from '../send-message.service';
 import {TokenStorageService} from '../_services/token-storage.service';
-import {AdChat} from "../ad-chat";
 import {MessageDataService} from "../messageDataService";
 
 @Component({
@@ -12,13 +11,12 @@ import {MessageDataService} from "../messageDataService";
   styleUrls: ['./ad-messages-details.component.css']
 })
 export class AdMessagesDetailsComponent implements OnInit {
-  messageReply: string;
-  public adChats: AdChat[];
   public messages: Message[];
 
   content: string;
   errorMessage = '';
   loggedUser: any;
+  chatInitator: string;
   adId: number;
   text: "";
 
@@ -38,6 +36,7 @@ export class AdMessagesDetailsComponent implements OnInit {
 
     this.messages = this.messageDataService.messages;
     this.adId = this.messageDataService.adId;
+    this.chatInitator = this.messages[0].user1;
     this.messages.forEach(
       p=> {
         console.log("msgs in chat " + p.messageContent + " for ad id " + p.adId);
@@ -47,9 +46,14 @@ export class AdMessagesDetailsComponent implements OnInit {
 
   sendMessage(): void {
     const messageContent = this.form.messageReply;
-    let sender = this.messages[0].user1;
-    console.log("send Message - ad id " + this.adId + " msg " + messageContent + " from user " + sender);
-    this.messageService.sendMessage(this.adId, messageContent, sender).subscribe(
+    let sender = this.loggedUser.username;
+    let receiver = "";
+    //if ad owner is sending msg
+    if(sender != this.chatInitator) {
+      receiver = this.chatInitator;
+    }
+    console.log("send Message - ad id " + this.adId + " msg " + messageContent + " from user " + JSON.stringify(sender));
+    this.messageService.sendMessageChat(this.adId, messageContent, sender, receiver).subscribe(
       data => {
         console.log("Sending" + data);
       },
