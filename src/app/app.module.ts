@@ -27,6 +27,7 @@ import {MessageAlertComponent} from './message-alert/message-alert.component';
 import {AdChatComponent} from './ad-chat/ad-chat.component';
 import {AdMessagesDetailsComponent} from './ad-messages-details/ad-messages-details.component';
 import {HomeComponent} from './home/home.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   {path: 'adChat/adMessagesDetails/:adId', component: AdMessagesDetailsComponent},
   {path: 'board-admin', component: BoardAdminComponent},
   {path: 'contactModal/:username', component: ContactModalComponent},
+  {path: 'file-upload', component: FileUploadComponent},
   //{path: '**', component: PageNotFoundComponent}
 ]
 
@@ -61,6 +63,7 @@ const routes: Routes = [
     AdChatComponent,
     AdMessagesDetailsComponent,
     HomeComponent,
+    FileUploadComponent,
 
   ],
   imports: [

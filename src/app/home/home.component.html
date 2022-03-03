@@ -20,8 +20,8 @@
                 <h5 class="card-subtitle mb-2 text-muted ">{{ad?.county}}</h5>
               </div>
               <div class="tab-pane" id="userProfile">{{ad?.username}}</div>
-              <li (click)="openContactModal(ad)" class="list-group-item"><i class="fa fa-envelope float-right"></i>{{ad?.user?.username}}<a href="#"></a></li>
-              <button (click)="openReviewModal(ad)" *ngIf="isLoggedIn" type="button" class="btn btn-primary">Rate</button>
+              <li (click)="openContactModal(ad)" *ngIf="isLoggedUsersAd(ad.user.username)" class="list-group-item"><i class="fa fa-envelope float-right"></i>{{ad?.user?.username}}<a href="#"></a></li>
+              <button (click)="openReviewModal(ad)" *ngIf="isLoggedIn && isLoggedUsersAd(ad.user.username)" type="button" class="btn btn-primary">Rate</button>
             </div>
           </div>
         </div>

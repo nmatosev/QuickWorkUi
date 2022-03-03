@@ -6,13 +6,11 @@ import {ApiService} from './api.service';
 import {TokenStorageService} from './_services/token-storage.service';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {AdModalComponent} from './ad-modal/ad-modal.component';
-import {Ad} from "./ad";
 import {County} from "./county";
-import {ContactModalComponent} from "./contact-modal/contact-modal.component";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
-import {WriteReviewComponent} from "./write-review/write-review.component";
+import {FileUploadService} from "./file-upload.service";
 
 @Component({
   selector: 'app-root',
@@ -29,8 +27,10 @@ export class AppComponent {
   public users: User[];
   public counties: County[];
   page: number = 1;
+  public profilePic: any;
 
-  constructor(private userService: ApiService, private tokenStorageService: TokenStorageService, public matDialog: MatDialog, private modalService: NgbModal) {
+  constructor(private userService: ApiService, private tokenStorageService: TokenStorageService, public matDialog: MatDialog, private modalService: NgbModal,
+              private fileUploadService: FileUploadService) {
   }
 
   // fetch users on refresh
@@ -44,6 +44,8 @@ export class AppComponent {
       const loggedUser = this.tokenStorageService.getUser();
       this.roles = loggedUser.roles;
       this.username = loggedUser.username;
+      this.profilePic = this.fileUploadService.getImage(loggedUser.username);
+      console.log("profile pic " + this.profilePic)
     }
 
     this.userService.getCounties().subscribe(

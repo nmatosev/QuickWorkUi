@@ -1,9 +1,9 @@
 <div style="width: 380px;">
   <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
     <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-      <input class="fs-5 fw-semibold" [(ngModel)]="currentUser.username" />
+      <div class="fs-5 fw-semibold">{{currentUser.username}}</div>
     </div>
-    <div class="list-group list-group-flush border-bottom scrollArea">
+    <div class="list-group scrollArea">
       <!--We want to show last message in the chat-->
       <div class="list-group-item list-group-item-action py-3 lh-tight" *ngFor="let adChat of adChats">
         <!--figure out how to get separate chat window for every chat-->

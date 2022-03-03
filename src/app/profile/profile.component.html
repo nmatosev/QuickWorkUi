@@ -18,10 +18,12 @@
         {{ role }}
       </li>
     </ul>
+    <div>Set your profile picture</div>
+    <app-file-upload [username]=currentUser.username></app-file-upload>
+
   </header>
 
 </div>
-
 
 
 <ng-template #loggedOut>
