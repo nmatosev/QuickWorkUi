@@ -1,5 +1,5 @@
 // mirroanje objekta s bekenda
-export interface Ad{
+export interface Ad {
   id: number;
   title: string;
   content: string;

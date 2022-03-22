@@ -10,7 +10,8 @@ import {County} from "./county";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
-import {FileUploadService} from "./file-upload.service";
+import {ProfilePicture} from "./profile-picture";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -27,10 +28,11 @@ export class AppComponent {
   public users: User[];
   public counties: County[];
   page: number = 1;
-  public profilePic: any;
+  public profilePic: ProfilePicture;
+  public profilePicture64: string;
 
   constructor(private userService: ApiService, private tokenStorageService: TokenStorageService, public matDialog: MatDialog, private modalService: NgbModal,
-              private fileUploadService: FileUploadService) {
+              private _sanitizer: DomSanitizer) {
   }
 
   // fetch users on refresh
@@ -44,8 +46,12 @@ export class AppComponent {
       const loggedUser = this.tokenStorageService.getUser();
       this.roles = loggedUser.roles;
       this.username = loggedUser.username;
-      this.profilePic = this.fileUploadService.getImage(loggedUser.username);
-      console.log("profile pic " + this.profilePic)
+      this.userService.getImage("neno").subscribe(
+        (response: ProfilePicture) => {
+          this.profilePic = response;
+          this.profilePicture64 = this.profilePic.picByte;
+        }
+      )
     }
 
     this.userService.getCounties().subscribe(
@@ -56,7 +62,6 @@ export class AppComponent {
         this.content = JSON.parse(err.error).message;
       }
     )
-
   }
 
   logout() {

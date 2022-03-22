@@ -1,10 +1,11 @@
-import { Observable } from 'rxjs';
-import { User } from './user';
-import { Ad } from './ad';
+import {Observable} from 'rxjs';
+import {User} from './user';
+import {Ad} from './ad';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {County} from "./county";
+import {ProfilePicture} from "./profile-picture";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ import {County} from "./county";
 export class ApiService {
   private apiServerUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   //mapiranje backend objekta u fe
   public getUsers(): Observable<User[]> {
@@ -30,11 +32,17 @@ export class ApiService {
   }
 
   getUserBoard(): Observable<any> {
-    return this.http.get(`${this.apiServerUrl}/user`, { responseType: 'text' });
+    return this.http.get(`${this.apiServerUrl}/user`, {responseType: 'text'});
   }
 
   getAdminBoard(): Observable<any> {
-    return this.http.get(`${this.apiServerUrl}/admin`, { responseType: 'text' });
+    return this.http.get(`${this.apiServerUrl}/admin`, {responseType: 'text'});
+  }
+
+  getImage(username: string): Observable<ProfilePicture> {
+    //Make a call to backend to get the Image Bytes.
+    console.log("call to profile pic");
+    return this.http.get<ProfilePicture>(`${this.apiServerUrl}/public/profilePicture`)
   }
 
 }
