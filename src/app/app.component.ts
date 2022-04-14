@@ -46,7 +46,7 @@ export class AppComponent {
       const loggedUser = this.tokenStorageService.getUser();
       this.roles = loggedUser.roles;
       this.username = loggedUser.username;
-      this.userService.getImage("neno").subscribe(
+      this.userService.getImage(loggedUser.username).subscribe(
         (response: ProfilePicture) => {
           this.profilePic = response;
           this.profilePicture64 = this.profilePic.picByte;
