@@ -49,7 +49,7 @@ export class AppComponent {
       this.userService.getImage(loggedUser.username).subscribe(
         (response: ProfilePicture) => {
           this.profilePic = response;
-          this.profilePicture64 = this.profilePic.picByte;
+          this.profilePicture64 = this.profilePic.encodedPicture;
         }
       )
     }
