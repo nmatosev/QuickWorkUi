@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
+import {NgxIntlTelInputComponent} from "ngx-intl-tel-input";
 
 @Component({
   selector: 'app-register',
@@ -23,13 +24,11 @@ export class RegisterComponent implements OnInit {
 
     this.authService.register(username, email, phoneNumber, password).subscribe(
       data => {
-        console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },
       err => {
         this.errorMessage = err.error.message;
-        console.log("usa u error " + this.errorMessage)
         this.isSignUpFailed = true;
       }
     );

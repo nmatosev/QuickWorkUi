@@ -2,11 +2,6 @@
   <div id="modal-content-wrapper">
     <div class="col-md-8">
       <div class="card card-container">
-        <!--    <img
-              id="profile-img"
-              src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-              class="profile-img-card"
-            />-->
         <form
           *ngIf="!isSuccessful"
           name="form"
@@ -57,17 +52,22 @@
           <div class="form-group">
             <label for="phoneNumber">Phone number</label>
             <input
-              type="number"
+              type="tel"
               class="form-control"
               name="phoneNumber"
               [(ngModel)]="form.phoneNumber"
               required
               minlength="9"
+              pattern="[0-9]+"
               #phoneNumber="ngModel"
             />
             <div class="alert-danger" *ngIf="phoneNumber.errors && f.submitted">
+              <div *ngIf="phoneNumber.errors.required">Phone number is required!</div>
               <div *ngIf="phoneNumber.errors.minlength">
-                Password must be at least 6 characters
+                Phone number should have at least 9 numbers!
+              </div>
+              <div *ngIf="phoneNumber.errors.pattern">
+                Phone number should only have numbers!
               </div>
             </div>
           </div>
@@ -83,9 +83,9 @@
               #password="ngModel"
             />
             <div class="alert-danger" *ngIf="password.errors && f.submitted">
-              <div *ngIf="password.errors.required">Password is required</div>
+              <div *ngIf="password.errors.required">Password is required!</div>
               <div *ngIf="password.errors.minlength">
-                Password must be at least 6 characters
+                Password must be at least 6 characters!
               </div>
             </div>
           </div>

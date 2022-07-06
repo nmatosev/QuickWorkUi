@@ -54,7 +54,9 @@ export class AdModalComponent implements OnInit {
       err => {
         this.errorMessage = err.error.message;
       });
-    this.closeModal();
+    //this.closeModal();
+    this.reloadPage();
+
   }
 
   // just close the modal
@@ -63,6 +65,9 @@ export class AdModalComponent implements OnInit {
 
   }
 
+  reloadPage(): void {
+    window.location.reload();
+  }
 
   onSaveAd(addForm: any) {
 
