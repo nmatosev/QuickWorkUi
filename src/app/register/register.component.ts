@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
+import {NgxIntlTelInputComponent} from "ngx-intl-tel-input";
 
 @Component({
   selector: 'app-register',
@@ -19,11 +20,10 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { username, email, password } = this.form;
+    const { username, email, phoneNumber, password } = this.form;
 
-    this.authService.register(username, email, password).subscribe(
+    this.authService.register(username, email, phoneNumber, password).subscribe(
       data => {
-        console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },
@@ -32,5 +32,10 @@ export class RegisterComponent implements OnInit {
         this.isSignUpFailed = true;
       }
     );
+    this.reloadPage();
+  }
+
+  reloadPage(): void {
+    window.location.reload();
   }
 }

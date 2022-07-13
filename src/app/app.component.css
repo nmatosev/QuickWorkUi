@@ -1,0 +1,27 @@
+#app {
+  background-color: #53a4f0;
+}
+
+body{
+  background: #53a4f0;
+}
+
+.dropdown-menu {
+
+}
+
+.dropdown-item {
+  color: black;
+}
+
+.dropdown-item:hover {
+  color: gray;
+}
+
+.navbar {
+  padding-right: 62px;
+}
+
+footer{
+  margin-top: auto;
+}

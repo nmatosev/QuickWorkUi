@@ -3,7 +3,15 @@ import {Component} from '@angular/core';
 import {User} from './user';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ApiService} from './api.service';
-import { TokenStorageService } from './_services/token-storage.service';
+import {TokenStorageService} from './_services/token-storage.service';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {AdModalComponent} from './ad-modal/ad-modal.component';
+import {County} from "./county";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {LoginComponent} from "./login/login.component";
+import {RegisterComponent} from "./register/register.component";
+import {ProfilePicture} from "./profile-picture";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -16,10 +24,15 @@ export class AppComponent {
   isLoggedIn = false;
   showAdminBoard = false;
   username?: string;
-
+  content: string;
   public users: User[];
+  public counties: County[];
+  page: number = 1;
+  public profilePic: ProfilePicture;
+  public profilePicture64: string;
 
-  constructor(private userService: ApiService, private tokenStorageService: TokenStorageService) {
+  constructor(private userService: ApiService, private tokenStorageService: TokenStorageService, public matDialog: MatDialog, private modalService: NgbModal,
+              private _sanitizer: DomSanitizer) {
   }
 
   // fetch users on refresh
@@ -30,17 +43,25 @@ export class AppComponent {
 
     if (this.isLoggedIn) {
 
-      const loggerUser = this.tokenStorageService.getUser();
-
-      this.roles = loggerUser.roles;
-      console.log("user"+ loggerUser.roles);
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-
-      this.username = loggerUser.username;
-
+      const loggedUser = this.tokenStorageService.getUser();
+      this.roles = loggedUser.roles;
+      this.username = loggedUser.username;
+      this.userService.getImage(loggedUser.username).subscribe(
+        (response: ProfilePicture) => {
+          this.profilePic = response;
+          this.profilePicture64 = this.profilePic.encodedPicture;
+        }
+      )
     }
 
-
+    this.userService.getCounties().subscribe(
+      (response: County[]) => {
+        this.counties = response;
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    )
   }
 
   logout() {
@@ -59,17 +80,17 @@ export class AppComponent {
     )
   }
 
-  // adding model programticaly
-  public onOpenModel(user: User): void {
-    const container = document.getElementById('main-container');
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.style.display = 'none';
-    button.setAttribute('data-toggle', 'modal');
-    button.setAttribute('data-target', '#addEmployeeModal');
 
-    //container.appendChild(button);
-    button.click();
+  openCreateAdModal() {
+    const dialog = this.modalService.open(AdModalComponent);
   }
 
+
+  openLoginModal() {
+    const dialog = this.modalService.open(LoginComponent);
+  }
+
+  openRegisterModal() {
+    const dialog = this.modalService.open(RegisterComponent);
+  }
 }

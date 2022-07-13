@@ -2,26 +2,46 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router'
 import {HttpClientModule} from '@angular/common/http';
-import { authInterceptorProviders } from './_helpers/auth.interceptor';
-
-import { AppRoutingModule } from './app-routing.module';
+import {authInterceptorProviders} from './_helpers/auth.interceptor';
 import {AppComponent} from './app.component';
 import {ApiService} from './api.service';
+import {MessageDataService} from "./messageDataService";
 import {FormsModule} from '@angular/forms';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {ProfileComponent} from './profile/profile.component';
 import {BoardAdminComponent} from './board-admin/board-admin.component';
 import {BoardUserComponent} from './board-user/board-user.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AdModalComponent} from './ad-modal/ad-modal.component';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {UserProfileComponent} from './user-profile/user-profile.component';
+import {AdDetailsComponent} from './ad-details/ad-details.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {ContactModalComponent} from './contact-modal/contact-modal.component';
+import {WriteReviewComponent} from './write-review/write-review.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgxPaginationModule} from 'ngx-pagination';
+import {ReviewAlertComponent} from './review-alert/review-alert.component';
+import {MessageAlertComponent} from './message-alert/message-alert.component';
+import {AdChatComponent} from './ad-chat/ad-chat.component';
+import {AdMessagesDetailsComponent} from './ad-messages-details/ad-messages-details.component';
 import {HomeComponent} from './home/home.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+
 
 const routes: Routes = [
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'home', component: HomeComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'board-admin', component: BoardAdminComponent}
-
+  {path: 'adChat', component: AdChatComponent},
+  {path: 'adChat/adMessagesDetails/:adId', component: AdMessagesDetailsComponent},
+  {path: 'board-admin', component: BoardAdminComponent},
+  {path: 'contactModal/:username', component: ContactModalComponent},
+  {path: 'file-upload', component: FileUploadComponent},
+  //{path: '**', component: PageNotFoundComponent}
 ]
 
 @NgModule({
@@ -32,16 +52,38 @@ const routes: Routes = [
     ProfileComponent,
     BoardAdminComponent,
     BoardUserComponent,
-    HomeComponent
+    AdModalComponent,
+    UserProfileComponent,
+    AdDetailsComponent,
+    PageNotFoundComponent,
+    ContactModalComponent,
+    WriteReviewComponent,
+    ReviewAlertComponent,
+    MessageAlertComponent,
+    AdChatComponent,
+    AdMessagesDetailsComponent,
+    HomeComponent,
+    FileUploadComponent,
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatDialogModule,
+    BrowserAnimationsModule,
+    NgbModule,
+    NgxPaginationModule
   ],
-  providers: [ApiService, authInterceptorProviders],
-  bootstrap: [AppComponent]
+  providers: [ApiService, MessageDataService,
+    authInterceptorProviders, {
+    provide: MatDialogRef,
+    useValue: {}
+  }],
+  bootstrap: [AppComponent],
+  entryComponents: [AdModalComponent]
+
 })
 export class AppModule {
 }

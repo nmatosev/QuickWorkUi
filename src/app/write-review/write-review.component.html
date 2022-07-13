@@ -1,0 +1,32 @@
+<div class="row">
+  <div id="modal-content-wrapper">
+    <header id="modal-header">
+      <h1 id="modal-title">Submit review</h1>
+    </header>
+    <section id="modal-body">
+      <p>Write review for user {{user.username}}</p>
+    </section>
+    <form #addForm="ngForm" (ngSubmit)="onSaveReview(addForm)">
+
+      <div class="form-group">
+        <textarea ngModel class="form-control" name="content" id="content" [(ngModel)]="form.content" rows="4" cols="50"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Add your rating </label>
+        <br/>
+        <ngb-rating [max]="5" [(rate)]="form.rating" [readonly]="false">
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star" [class.filled]="fill === 100" [class.bad]="index <= 5">&#9733;</span>
+          </ng-template>
+        </ngb-rating>
+      </div>
+
+    </form>
+    <footer id="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="submitReview()">Submit review</button>
+      <button type="button" class="btn btn-secondary" (click)="closeModal()">Go back</button>
+    </footer>
+
+  </div>
+</div>

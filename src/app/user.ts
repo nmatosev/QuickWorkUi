@@ -5,6 +5,7 @@ export interface User{
   rating: string;
   role: string;
   email: string;
+  token: string;
   /*phone: string;
   imageUrl: string;*/
 }

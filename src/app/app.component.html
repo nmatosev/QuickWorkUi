@@ -1,91 +1,68 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div id="app">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" style="color:white;">Quick work</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02"
+    <a href="/home" class="navbar-brand" style="color:white;">Quick Work</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+            aria-controls="navbarColor02"
             aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
   </nav>
-
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">QuickWork</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home </a>
+        <a (click)="openCreateAdModal()" class="btn btn-info" *ngIf="isLoggedIn" class="nav-link">Create new ad </a>
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
       </li>
       <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
       <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+        <a (click)="openRegisterModal()" class="nav-link">Sign up</a>
       </li>
       <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Login</a>
+        <a (click)="openLoginModal()" class="nav-link">Log in</a>
       </li>
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-      <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile">hjg{{ username }}</a>
-      </li>
-      <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">Log Out</a>
-      </li>
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle show"
+           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="true">
+          <img [src]="profilePicture64" width="32" height="32" class="rounded-circle me-2">
+          <strong>{{username}}</strong>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow show" aria-labelledby="dropdownUser" style=""
+            data-popper-placement="top-start">
+          <li><a href="/adChat" class="dropdown-item">Messages</a></li>
+          <li><a href="/profile" class="dropdown-item">Profile</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a href="/" class="dropdown-item" (click)="logout()">Sign out</a></li>
+        </ul>
+      </div>
     </ul>
   </nav>
+  <body class="d-flex flex-column min-vh-100">
 
-  <div class="container" id="up-container">
-    <div class="btn-group btn-group-lg" role="group" aria-label="...">
-      <button type="button" class="btn btn-primary">Tražim posao</button>
-      <button type="button" class="btn btn-info">Nudim posao</button>
-    </div>
-  </div>
-  <div class="container" id="main-container">
     <router-outlet></router-outlet>
+  </body>
 
-    <div class="row">
-      <div *ngFor="let user of users" from class="col-md-6 col-xl-3">
-        <div class="card m-b-30">
-          <div class="card-body row">
-            <div class="col-6">
-              <!--<a href=""><img src="{{employee?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>-->
-              <!--
-                          <a href="https://ibb.co/nzY036D"><img src={{employee.imageUrl}} alt="pp" class="img-fluid rounded-circle w-60"></a>
-              -->
-            </div>
-            <div class="col-6 card-title align-self-center mb-0">
-              <h5>{{user?.username}}</h5>
-            </div>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">{{user?.username}}</a></li>
-            <li class="list-group-item"><i class="fas fa-star float-right"></i>Rating : {{user?.rating}}</li>
-          </ul>
-          <div class="card-body">
-            <!--          <div class="float-right btn-group btn-group-sm">
-                        <a (click)="onOpenModel(employee, 'edit')"class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-                        <a (click)="onOpenModel(employee, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
-                      </div>-->
-
-            <div class="card-body">
-              <div class="float-right btn-group btn-group-sm">
-                <a (click)="onOpenModel(user)" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i
-                  class="fa fa-pencil"></i> </a>
-                <a (click)="onOpenModel(user)" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip"
-                   data-original-title="Delete"><i class="fa fa-times"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <footer class="bg-light text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center text-white p-3" style="background-color: rgba(1,1,1,1);">
+      © 2021 Copyright:
+      <a class="text-white" href="#">Quick Work</a>
     </div>
-  </div>
+    <!-- Copyright -->
+  </footer>
+
 </div>
+
+
+

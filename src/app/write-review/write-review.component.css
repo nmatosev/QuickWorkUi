@@ -1,0 +1,30 @@
+.row{
+  margin: 20px;
+}
+
+.btn {
+  margin: 5px;
+}
+
+.survey-hr{
+  margin:10px 0;
+  border: .5px solid #ddd;
+}
+ngb-rating {
+
+  background: white;
+  outline: none !important;
+}
+.star {
+  font-size: 50px;
+  color: #b0c4de;
+}
+.bad {
+  color:rgb(196, 196, 191);
+}
+.filled.bad {
+  color: rgb(236, 217, 10);
+}
+::ng-deep label {
+  font-size: larger;
+}
