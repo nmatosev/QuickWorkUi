@@ -16,7 +16,7 @@ export class ReviewService {
 
 
   sendReview(reviewerUsername: string, reviewedUsername: string, content:string, rating: number): Observable<any> {
-    return this.http.post(environment.apiUrl + '/public/saveReview', {
+    return this.http.post(environment.apiUrl + '/public/review', {
       reviewerUsername: reviewerUsername,
       reviewedUsername: reviewedUsername,
       content: content,

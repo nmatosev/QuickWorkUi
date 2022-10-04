@@ -18,7 +18,7 @@ export class SendMessageService {
   username: string;
 
   sendMessageModal(adId: number, messageContent: string, sender:string): Observable<any> {
-    return this.http.post(this.apiServerUrl + '/public/sendMessage', {
+    return this.http.post(this.apiServerUrl + '/public/message', {
       adId: adId,
       messageContent: messageContent,
       sender: sender
@@ -26,7 +26,7 @@ export class SendMessageService {
   }
 
   sendMessageChat(adId: number, messageContent: string, sender:string, receiver:string): Observable<any> {
-    return this.http.post(this.apiServerUrl + '/public/sendMessage', {
+    return this.http.post(this.apiServerUrl + '/public/message', {
       adId: adId,
       messageContent: messageContent,
       sender: sender,

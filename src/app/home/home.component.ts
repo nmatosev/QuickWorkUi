@@ -9,6 +9,7 @@ import {County} from "../county";
 import {ContactModalComponent} from "../contact-modal/contact-modal.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {WriteReviewComponent} from "../write-review/write-review.component";
+import {Review} from "../review";
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit {
   public ad: Ad;
   public users: User[];
   public counties: County[];
+  public reviews: Review[];
   page: number = 1;
 
   constructor(private userService: ApiService, private tokenStorageService: TokenStorageService, private modalService: NgbModal) {
@@ -43,6 +45,8 @@ export class HomeComponent implements OnInit {
       console.log("user roles" + JSON.stringify(loggedUser));
       //this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.loggedUser = loggedUser.username;
+
+      //console.log("reviews " + this.getReviews());
 
     }
 
@@ -86,6 +90,17 @@ export class HomeComponent implements OnInit {
       }
     )
   }
+
+/*  public getReviews(): void {
+    this.userService.getReview("jane").subscribe(
+      (response: Review[]) => {
+        this.reviews = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }*/
 
   //checks if this ad is woned by user that is currently logged in
   isLoggedUsersAd(username: string): boolean {

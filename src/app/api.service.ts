@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {County} from "./county";
+import {Review} from "./review";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -31,6 +32,11 @@ export class ApiService {
     return this.http.get<Ad[]>(`${this.apiServerUrl}/public/ads`);
   }
 
+  public getReview(username: string): Observable<Review[]> {
+    //poredi po karticama
+    return this.http.get<Review[]>(`${this.apiServerUrl}/review/${username}`);
+  }
+
   public getCounties(): Observable<County[]> {
     return this.http.get<County[]>(`${this.apiServerUrl}/public/counties`)
   }
@@ -46,12 +52,9 @@ export class ApiService {
   getImage(username: string): Observable<any> {
     //Make a call to backend to get the Image Bytes.
     console.log("Call to get profile pic for username " + username);
-    return this.http.post(this.apiServerUrl + '/public/profilePicture', {
+    return this.http.post(this.apiServerUrl + '/public/profile-picture', {
       username: username
     }, httpOptions)
-/*
-    return this.http.get<ProfilePicture>(`${this.apiServerUrl}/public/profilePicture/${username}`)
-*/
   }
 
 }
