@@ -13,16 +13,15 @@ import {MessageDataService} from "../messageDataService";
 export class AdMessagesDetailsComponent implements OnInit {
   public messages: Message[];
 
-  content: string;
+  form: any = {
+    messageContent: null,
+  };
+
   errorMessage = '';
   loggedUser: any;
   chatInitator: string;
   adId: number;
   text: "";
-
-  form: any = {
-    messageReply: null,
-  };
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private messageService: SendMessageService,
               private tokenStorageService: TokenStorageService, private messageDataService: MessageDataService) {
@@ -38,18 +37,18 @@ export class AdMessagesDetailsComponent implements OnInit {
     this.adId = this.messageDataService.adId;
     this.chatInitator = this.messages[0].user1;
     this.messages.forEach(
-      p=> {
-        console.log("msgs in chat " + p.messageContent + " for ad id " + p.adId);
+      p => {
+        console.log("Messages in chat " + p.messageContent + " for ad id " + p.adId);
       }
     )
   }
 
   sendMessage(): void {
-    const messageContent = this.form.messageReply;
+    const messageContent = this.form.messageContent;
     let sender = this.loggedUser.username;
     let receiver = "";
     //if ad owner is sending msg
-    if(sender != this.chatInitator) {
+    if (sender != this.chatInitator) {
       receiver = this.chatInitator;
     }
     console.log("send Message - ad id " + this.adId + " msg " + messageContent + " from user " + JSON.stringify(sender));
@@ -65,15 +64,6 @@ export class AdMessagesDetailsComponent implements OnInit {
   }
 
   reloadPage(messageContent: string): void {
-    //window.location.reload();
-    /*this.sendMessageService.getMessagesForUserOnAd(this.loggedUser.username, this.adId).subscribe(
-      (response: Message[]) => {
-        this.messages = response;
-      },
-      err => {
-        this.errorMessage = JSON.parse(err.error).message;
-      }
-    );*/
     this.form.messageReply = "";
     console.log("reloaded " + JSON.stringify(this.messages));
     const newMessage = <Message>({

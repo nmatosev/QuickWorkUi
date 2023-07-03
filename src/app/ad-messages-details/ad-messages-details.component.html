@@ -1,5 +1,5 @@
-<div style="width: 380px;">
-  <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" >
+<div class="container">
+  <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
     <div class="list-group list-group-flush border-bottom scrollArea">
       <div class="list-group-item list-group-item-action py-3 lh-tight" *ngFor="let message of messages">
         <div class="d-flex w-100 align-items-center justify-content-between">
@@ -10,10 +10,30 @@
       </div>
     </div>
   </div>
-  <form>
-    <input class="form-control" placeholder="Write a reply" [(ngModel)]="form.messageReply" [ngModelOptions]="{standalone: true}"/>
+  <form
+    name="form"
+    (ngSubmit)="f.form.valid && sendMessage()"
+    #f="ngForm"
+    novalidate
+  >
+    <div class="form-group">
+      <input
+        class="form-control"
+        name="form"
+        required
+        minlength="1"
+        placeholder="Write a reply"
+        [(ngModel)]="form.message"
+        #message="ngModel"
+      />
+      <div class="alert-danger"
+           role="alert"
+           *ngIf="message.errors && f.submitted">
+        <div *ngIf="message.errors.required">Reply is empty!</div>
+        <div *ngIf="message.errors.minlength">Reply must be at least 1 character!</div>
+      </div>
+    </div>
   </form>
   <button type="button" class="btn btn-primary btn-block" (click)="sendMessage()">Send message</button>
-
 </div>
 

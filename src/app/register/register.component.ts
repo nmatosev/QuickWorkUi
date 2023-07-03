@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import {NgxIntlTelInputComponent} from "ngx-intl-tel-input";
 
 @Component({
   selector: 'app-register',

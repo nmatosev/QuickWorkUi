@@ -1,11 +1,11 @@
-<div style="width: 380px;">
+<div class="container">
   <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
-    <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+    <div class="d-flex align-items-center flex-shrink-0 p-4 link-dark text-decoration-none border-bottom">
       <div class="fs-5 fw-semibold">{{currentUser.username}}</div>
     </div>
     <div class="list-group scrollArea">
       <!--We want to show last message in the chat-->
-      <div class="list-group-item list-group-item-action py-3 lh-tight" *ngFor="let adChat of adChats">
+      <div class="list-group-item list-group-item-action py-4 lh-tight" *ngFor="let adChat of adChats">
         <!--figure out how to get separate chat window for every chat-->
         <div (click)="clickOnChat(adChat.adId)" routerLink="adMessagesDetails/{{adChat.adId}}" [state]="adChat.messages"
              class="d-flex w-100 align-items-center justify-content-between">
